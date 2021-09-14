@@ -35,7 +35,7 @@ def load_dalle_models() -> Dict:
         load_obj = torch.load(model_path)
         dalle_params, _, weights = load_obj.pop('hparams'), load_obj.pop('vae_params'), load_obj.pop('weights')
         dalle_params.pop('vae', None)
-        dalle = DALLE(vae=vae, **dalle_params).cuda()
+        dalle = DALLE(vae=vae, **dalle_params, shift_tokens=False, rotary_emb=False).cuda()
         dalle.load_state_dict(weights)
         loaded_models[name] = dalle
 
