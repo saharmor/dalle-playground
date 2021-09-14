@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/dalle-playground/static/css/main.92e41723.chunk.css",
+    "main.js": "/dalle-playground/static/js/main.ae95f2c3.chunk.js",
+    "main.js.map": "/dalle-playground/static/js/main.ae95f2c3.chunk.js.map",
+    "runtime-main.js": "/dalle-playground/static/js/runtime-main.f1925457.js",
+    "runtime-main.js.map": "/dalle-playground/static/js/runtime-main.f1925457.js.map",
+    "static/js/2.c4bc15df.chunk.js": "/dalle-playground/static/js/2.c4bc15df.chunk.js",
+    "static/js/2.c4bc15df.chunk.js.map": "/dalle-playground/static/js/2.c4bc15df.chunk.js.map",
+    "index.html": "/dalle-playground/index.html",
+    "precache-manifest.38e6425b48886957c6468af8fb8a1d9e.js": "/dalle-playground/precache-manifest.38e6425b48886957c6468af8fb8a1d9e.js",
+    "service-worker.js": "/dalle-playground/service-worker.js",
+    "static/css/main.92e41723.chunk.css.map": "/dalle-playground/static/css/main.92e41723.chunk.css.map",
+    "static/js/2.c4bc15df.chunk.js.LICENSE.txt": "/dalle-playground/static/js/2.c4bc15df.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f1925457.js",
+    "static/js/2.c4bc15df.chunk.js",
+    "static/css/main.92e41723.chunk.css",
+    "static/js/main.ae95f2c3.chunk.js"
+  ]
+}
