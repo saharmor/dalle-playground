@@ -57,6 +57,7 @@ const App = ({classes}) => {
     const [apiError, setApiError] = useState('')
     const maxImagesPerQuery = 4;
 
+    const validBackendUrl = isValidBackendEndpoint && backendUrl
 
     function enterPressedCallback(promptText) {
         console.log('API call to DALL-E web service with the following prompt [' + promptText + ']');
@@ -92,7 +93,7 @@ const App = ({classes}) => {
                 </Typography>
             </div>
 
-            {!isValidBackendEndpoint && <div className={classes.subtitle}>
+            {!validBackendUrl && <div className={classes.subtitle}>
                 <Typography variant="body1" color="textSecondary">
                     Put your DALL-E backend URL to start
                 </Typography>
@@ -108,7 +109,7 @@ const App = ({classes}) => {
                                              setIsCheckingBackendEndpoint={setIsCheckingBackendEndpoint}
                                              isCheckingBackendEndpoint={isCheckingBackendEndpoint}/>
                             <TextPromptInput enterPressedCallback={enterPressedCallback}
-                                             disabled={isFetchingImgs || !isValidBackendEndpoint || !backendUrl}/>
+                                             disabled={isFetchingImgs || !validBackendUrl}/>
                         </CardContent>
                     </Card>
                 </div>

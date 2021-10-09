@@ -2,7 +2,7 @@
   "name": "dalle-playground",
   "homepage": "https://saharmor.github.io/dalle-playground",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
