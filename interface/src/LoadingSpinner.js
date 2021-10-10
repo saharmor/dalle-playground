@@ -8,6 +8,7 @@ const useStyles = () => ({
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
+        marginTop: '80px',
     },
     loadingText: {
         paddingTop: '20px',

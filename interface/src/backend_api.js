@@ -3,6 +3,7 @@ import JsonBigint from "json-bigint";
 const REQUEST_TIMEOUT_SEC = 60000
 
 export async function callDalleService(backendUrl, text, numImages) {
+    const queryStartTime = new Date()
     const response = await Promise.race([
         (await fetch(backendUrl + `/dalle`, {
                 method: 'POST',
@@ -15,7 +16,7 @@ export async function callDalleService(backendUrl, text, numImages) {
                     'num_images': numImages,
                 })
             }
-        ).then((response)=> {
+        ).then((response) => {
             if (!response.ok) {
                 throw Error(response.statusText);
             }
@@ -23,7 +24,12 @@ export async function callDalleService(backendUrl, text, numImages) {
         })).text(), new Promise((_, reject) => setTimeout(
             () => reject(new Error('Timeout')), REQUEST_TIMEOUT_SEC))
     ]);
-    return JsonBigint.parse(response)
+
+
+    return {
+        'executionTime': Math.round(((new Date() - queryStartTime) / 1000 + Number.EPSILON) * 100) / 100,
+        'generatedImgs': JsonBigint.parse(response)
+    }
 }
 
 export async function checkIfValidBackend(backendUrl) {
