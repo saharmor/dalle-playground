@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2b4efc16a100c53e2f22d92c84de0870",
+    "revision": "bcb12bb899656b475e285d18ba4ceda3",
     "url": "/dalle-playground/index.html"
   },
   {
-    "revision": "b3f269245d424d9c2d29",
+    "revision": "64b08d1f60749b085c42",
     "url": "/dalle-playground/static/css/main.92e41723.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/dalle-playground/static/js/2.a7f54960.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b3f269245d424d9c2d29",
-    "url": "/dalle-playground/static/js/main.0277cc29.chunk.js"
+    "revision": "64b08d1f60749b085c42",
+    "url": "/dalle-playground/static/js/main.bed58d80.chunk.js"
   },
   {
     "revision": "2287b2335ed2078787ec",
