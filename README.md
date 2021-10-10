@@ -6,7 +6,8 @@
 A playground for DALL-E enthusiasts to tinker with the open-source version of
 OpenAI's [DALL-E](https://openai.com/blog/dall-e/).
 
-https://user-images.githubusercontent.com/6180201/124460076-30940180-dd8f-11eb-9bac-10144b17840b.mp4
+https://user-images.githubusercontent.com/6180201/136710500-8bb01b4c-5741-4007-a8ea-e18ba5895649.mp4
+
 
 ## Fast usage
 
