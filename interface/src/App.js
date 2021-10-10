@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Card, CardContent, Typography} from "@material-ui/core";
+import {
+    Card, CardContent, FormControl, FormHelperText,
+    InputLabel, MenuItem, Select, Typography
+} from "@material-ui/core";
 import {callDalleService} from "./backend_api";
 import GeneratedImageList from "./GeneratedImageList";
 import TextPromptInput from "./TextPromptInput";
@@ -26,6 +29,8 @@ const useStyles = () => ({
     },
     playgroundSection: {
         display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         flex: 1,
         width: '90%'
     },
@@ -38,8 +43,16 @@ const useStyles = () => ({
     searchQueryCard: {
         marginBottom: '20px'
     },
+    imagesPerQueryControl: {
+        marginTop: '20px',
+    },
+    formControl: {
+        margin: "20px",
+        minWidth: 120,
+    },
     gallery: {
         display: 'flex',
+        maxWidth: '50%',
         flex: '1',
         justifyContent: 'center',
         alignItems: 'center',
@@ -55,21 +68,26 @@ const App = ({classes}) => {
     const [isValidBackendEndpoint, setIsValidBackendEndpoint] = useState(true);
     const [generatedImages, setGeneratedImages] = useState([]);
     const [apiError, setApiError] = useState('')
-    const maxImagesPerQuery = 4;
+    const [imagesPerQuery, setImagesPerQuery] = useState(2);
 
+    const imagesPerQueryOptions = 10
     const validBackendUrl = isValidBackendEndpoint && backendUrl
 
     function enterPressedCallback(promptText) {
         console.log('API call to DALL-E web service with the following prompt [' + promptText + ']');
         setApiError('')
         setIsFetchingImgs(true)
-        callDalleService(backendUrl, promptText, maxImagesPerQuery).then((generatedImgs) => {
+        callDalleService(backendUrl, promptText, imagesPerQuery).then((generatedImgs) => {
             setGeneratedImages(generatedImgs)
             setIsFetchingImgs(false)
         }).catch((error) => {
-            setIsFetchingImgs(false)
             console.log('Error querying DALL-E service.', error)
-            setApiError('Error querying DALL-E service. Check your backend server logs.')
+            if (error.message === 'Timeout') {
+                setApiError('Timeout querying DALL-E service (>1min). Consider reducing the images per query or use a stronger backend.')
+            } else {
+                setApiError('Error querying DALL-E service. Check your backend server logs.')
+            }
+            setIsFetchingImgs(false)
         })
     }
 
@@ -107,9 +125,26 @@ const App = ({classes}) => {
                                              isValidBackendEndpoint={isValidBackendEndpoint}
                                              setIsValidBackendEndpoint={setIsValidBackendEndpoint}
                                              setIsCheckingBackendEndpoint={setIsCheckingBackendEndpoint}
-                                             isCheckingBackendEndpoint={isCheckingBackendEndpoint}/>
+                                             isCheckingBackendEndpoint={isCheckingBackendEndpoint}
+                                             disabled={isFetchingImgs}/>
                             <TextPromptInput enterPressedCallback={enterPressedCallback}
                                              disabled={isFetchingImgs || !validBackendUrl}/>
+
+                            <FormControl className={classes.imagesPerQueryControl}
+                                         variant="outlined">
+                                <InputLabel id="images-per-query-label">
+                                    Images per query
+                                </InputLabel>
+                                <Select labelId="images-per-query-label"
+                                        label="Images per query" value={imagesPerQuery}
+                                        disabled={isFetchingImgs}
+                                        onChange={(event) => setImagesPerQuery(event.target.value)}>
+                                    {Array.from(Array(imagesPerQueryOptions).keys()).map((num) => {
+                                        return <MenuItem key={num} value={num}>{num}</MenuItem>
+                                    })}
+                                </Select>
+                                <FormHelperText>More images = slower query</FormHelperText>
+                            </FormControl>
                         </CardContent>
                     </Card>
                 </div>

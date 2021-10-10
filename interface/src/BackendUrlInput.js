@@ -16,7 +16,7 @@ const useStyles = () => ({
 })
 
 const BackendUrlInput = ({
-                             classes, setBackendValidUrl,
+                             classes, disabled, setBackendValidUrl,
                              isValidBackendEndpoint, setIsValidBackendEndpoint,
                              isCheckingBackendEndpoint, setIsCheckingBackendEndpoint,
                          }) => {
@@ -51,16 +51,16 @@ const BackendUrlInput = ({
     return (
         <Grid container spacing={1} alignContent="center">
             <Grid item xs={10}>
-                <TextField className={classes.inputBackend} id="standard-basic" label="Backend URL"
-                           value={backendUrl} fullWidth
+                <TextField className={classes.inputBackend} fullWidth id="standard-basic"
+                           label="Backend URL" value={backendUrl} disabled={disabled}
                            error={!isValidBackendEndpoint && backendUrl !== ''}
-                           helperText={!isValidBackendEndpoint && backendUrl !== '' && "Make sure this is a valid URL"}
+                           helperText={!isValidBackendEndpoint && backendUrl !== '' && "No running DALL-E server with this URL"}
                            onChange={(event) => onChange(event.target.value)}/>
             </Grid>
-            <Grid item className={classes.loadingSpinner} xs={2}>
+            {isCheckingBackendEndpoint && <Grid item className={classes.loadingSpinner} xs={2}>
                 <PulseLoader sizeUnit={"px"} size={5} color="purple"
                              loading={isCheckingBackendEndpoint}/>
-            </Grid>
+            </Grid>}
         </Grid>
     )
 }

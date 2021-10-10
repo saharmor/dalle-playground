@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.11.2",
     "install": "^0.13.0",
     "json-bigint": "^1.0.0",
     "npm": "^7.19.1",

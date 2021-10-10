@@ -10,7 +10,7 @@ https://user-images.githubusercontent.com/6180201/124460076-30940180-dd8f-11eb-9
 ## Fast usage
 
 You can tinker with the DALL-E playground using a pre-hosted frontend. Follow these steps:
-1. Run the DALL-E image generating web server using Google Colab and [this notebook](https://colab.research.google.com/github/rom1504/dalle-service/blob/master/dalle_server.ipynb)
+1. Run the DALL-E image generating web server using Google Colab and [this notebook](https://colab.research.google.com/github/rom1504/dalle-service/blob/master/dalle_playground.ipynb)
 2. Copy the URL from the last executed cell. Look for the line with "_your url is: https://XXXX.loca.lt_".
 3. Browse https://rom1504.github.io/dalle-service and put copied url in the `Backend URL` input field.
 
