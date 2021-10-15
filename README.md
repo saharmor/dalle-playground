@@ -39,5 +39,5 @@ Follow these steps in case you'd like to clone and run the DALL-E playground loc
 
 ## Acknowledgements
 
-This repo is a React flavour of [Boris Dayma's](https://github.com/borisdayma) DALL-E Mini
+This repo is a full-stack flavour of [Boris Dayma's](https://github.com/borisdayma) DALL-E Mini
 repository. 
