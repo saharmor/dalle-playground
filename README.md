@@ -4,7 +4,7 @@
 </p>
 
 A playground for DALL-E enthusiasts to tinker with the open-source version of
-OpenAI's [DALL-E](https://openai.com/blog/dall-e/).
+OpenAI's [DALL-E](https://openai.com/blog/dall-e/), based on [DALL-E Mini](https://github.com/borisdayma/dalle-mini).
 
 https://user-images.githubusercontent.com/6180201/136710500-8bb01b4c-5741-4007-a8ea-e18ba5895649.mp4
 
