@@ -118,7 +118,7 @@ def generate_images(prompt:str, num_predictions: int):
       for img in decoded_images:
           images.append(Image.fromarray(np.asarray(img * 255, dtype=np.uint8)))
         
-      return images
+  return images
 
 @app.route('/dalle', methods=['POST'])
 @cross_origin()
