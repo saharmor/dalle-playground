@@ -5,5 +5,5 @@ git+https://github.com/patil-suraj/vqgan-jax.git
 git+https://github.com/borisdayma/dalle-mini.git@20a36267d188691ff92273f7048abb0c8339d6b2
 tqdm
 transformers
-flax==0.3.5
+flax
 
