@@ -15,7 +15,6 @@ from vqgan_jax.modeling_flax_vqgan import VQModel
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from flask_script import Manager, Server
 
 from PIL import Image
 from tqdm.notebook import trange
@@ -33,7 +32,7 @@ import wandb
 
 app = Flask(__name__)
 CORS(app)
-
+print('--> Starting DALL-E Server. This might take up to two minutes.')
 
 # dalle-mini
 DALLE_MODEL = "dalle-mini/dalle-mini/model-mheh9e55:latest"  # can be wandb artifact or 🤗 Hub or local folder or google bucket
@@ -145,15 +144,9 @@ def generate_images_api():
 def health_check():
     return jsonify(success=True)
 
-
-class CustomServer(Server):
-    def __call__(self, app, *args, **kwargs):
-        generate_images("warm-up", 1)
-        print('--> DALL-E Server is ready to use!')
-        return Server.__call__(self, app, *args, **kwargs)
-
-manager = Manager(app)
-manager.add_command('runserver', CustomServer())
+with app.app_context():
+    generate_images("warm-up", 1)
+    print('--> DALL-E Server is ready to go!')
 
 if __name__ == '__main__':
-    manager.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
+    app.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
