@@ -15,6 +15,7 @@ from vqgan_jax.modeling_flax_vqgan import VQModel
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
+from flask_script import Manager, Server
 
 from PIL import Image
 from tqdm.notebook import trange
@@ -146,8 +147,16 @@ def health_check():
 
 @app.before_first_request
 def before_first_request_func():
-  generate_images("warm-up", 1)
-  print('--> DALL-E Server is ready to use!')
+  
+
+class CustomServer(Server):
+    def __call__(self, app, *args, **kwargs):
+        generate_images("warm-up", 1)
+        print('--> DALL-E Server is ready to use!')
+        return Server.__call__(self, app, *args, **kwargs)
+
+manager = Manager(app)
+manager.add_command('runserver', CustomServer())
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
+    manager.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
