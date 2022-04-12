@@ -144,6 +144,7 @@ def generate_images_api():
 def health_check():
     return jsonify(success=True)
 
+generate_images("warm-up", 1)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
