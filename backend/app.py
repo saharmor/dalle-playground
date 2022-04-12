@@ -145,9 +145,6 @@ def generate_images_api():
 def health_check():
     return jsonify(success=True)
 
-@app.before_first_request
-def before_first_request_func():
-  
 
 class CustomServer(Server):
     def __call__(self, app, *args, **kwargs):
