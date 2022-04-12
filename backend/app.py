@@ -144,7 +144,10 @@ def generate_images_api():
 def health_check():
     return jsonify(success=True)
 
-generate_images("warm-up", 1)
+@app.before_first_request
+def before_first_request_func():
+  generate_images("warm-up", 1)
+  print('--> DALL-E Server is ready to use!')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
