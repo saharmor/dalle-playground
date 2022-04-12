@@ -146,7 +146,7 @@ def health_check():
 
 with app.app_context():
     generate_images("warm-up", 1)
-    print('--> DALL-E Server is ready to go!')
+    print('--> DALL-E Server is up and running!')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
