@@ -36,7 +36,7 @@ const useStyles = () => ({
         display: 'flex',
         flexDirection: 'column',
         padding: '1em',
-        maxWidth: '320px',
+        maxWidth: '300px',
     },
     searchQueryCard: {
         marginBottom: '20px'
