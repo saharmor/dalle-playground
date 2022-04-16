@@ -13,8 +13,7 @@ https://user-images.githubusercontent.com/6180201/136710500-8bb01b4c-5741-4007-a
 
 You can tinker with the DALL-E playground using a Github-hosted frontend. Follow these steps:
 
-1. Run the DALL-E backend using Google Colab
-   and [this notebook](https://colab.research.google.com/github/saharmor/dalle-playground/blob/main/backend/dalle_playground_backend.ipynb)
+1. Run the DALL-E backend using Google Colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/saharmor/dalle-playground/blob/main/backend/dalle_playground_backend.ipynb)
 2. Copy the URL from the last executed cell. Look for the line having `your url is: https://XXXX.loca.lt`
 3. **Wait for the backend to fully load**, this should take ~2min and you should see `--> DALL-E Server is up and running!`
 5. Browse https://saharmor.github.io/dalle-playground/?backendUrl=https://XXXX.loca.lt where the `backendUrl` query parameter should be the url from the previous step
