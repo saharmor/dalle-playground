@@ -16,7 +16,6 @@ from vqgan_jax.modeling_flax_vqgan import VQModel
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
-from PIL import Image
 from tqdm.notebook import trange
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard_prng_key
@@ -35,7 +34,7 @@ CORS(app)
 print('--> Starting DALL-E Server. This might take up to two minutes.')
 
 # dalle-mini
-DALLE_MODEL = "dalle-mini/dalle-mini/model-mheh9e55:latest"  # can be wandb artifact or 🤗 Hub or local folder or google bucket
+DALLE_MODEL = "dalle-mini/dalle-mini/wzoooa1c:latest"  # can be wandb artifact or 🤗 Hub or local folder or google bucket
 # 3f0lem84
 DALLE_COMMIT_ID = None
 
