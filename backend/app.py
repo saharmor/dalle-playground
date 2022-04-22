@@ -54,7 +54,7 @@ wandb.init(anonymous="must")
 
 
 # Load models & tokenizer
-model = DalleBart.from_pretrained(DALLE_MODEL, revision=DALLE_COMMIT_ID, dtype=dtype, abstract_init=True)
+model = DalleBart.from_pretrained(DALLE_MODEL, revision=DALLE_COMMIT_ID)
 vqgan = VQModel.from_pretrained(VQGAN_REPO, revision=VQGAN_COMMIT_ID)
 
 # convert model parameters for inference if requested
