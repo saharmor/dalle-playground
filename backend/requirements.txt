@@ -2,7 +2,7 @@ Flask==1.1.2
 Flask-Cors==3.0.9
 Flask-RESTful==0.3.8
 git+https://github.com/patil-suraj/vqgan-jax.git
-git+https://github.com/borisdayma/dalle-mini.git
+git+https://github.com/borisdayma/dalle-mini.git@f3a8cbbc67ec492eea897ac53d98bac80e59daaf
 tqdm
 transformers
 flax
