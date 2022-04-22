@@ -1,9 +1,8 @@
 Flask==1.1.2
 Flask-Cors==3.0.9
 Flask-RESTful==0.3.8
+git+https://github.com/huggingface/transformers.git
 git+https://github.com/patil-suraj/vqgan-jax.git
 git+https://github.com/borisdayma/dalle-mini.git
 tqdm
-transformers
 flax
-
