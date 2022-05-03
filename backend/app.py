@@ -35,7 +35,7 @@ print('--> Starting DALL-E Server. This might take up to two minutes.')
 
 # dalle-mini
 DALLE_MODEL = "dalle-mini/dalle-mini/wzoooa1c:latest"  # can be wandb artifact or 🤗 Hub or local folder or google bucket
-# 3f0lem84
+# DALLE_MODEL = 'dalle-mini/dalle-mini/mega-1:latest' # uncomment this line to use DALL-E Mega. Warning: requires significantly more storage and GPU RAM
 DALLE_COMMIT_ID = None
 
 # VQGAN model
@@ -45,8 +45,8 @@ VQGAN_COMMIT_ID = "e93a26e7707683d349bf5d5c41c5b0ef69b677a9"
 
 # We can customize top_k/top_p used for generating samples
 gen_top_k = None
-gen_top_p = None
-temperature = 0.85
+gen_top_p = 0.9
+temperature = None
 cond_scale = 3.0
 
 wandb.init(anonymous="must")
@@ -147,5 +147,6 @@ with app.app_context():
     generate_images("warm-up", 1)
     print('--> DALL-E Server is up and running!')
 
-if __name__ == '__main__':
+
+if __name__ == '__main__':    
     app.run(host="0.0.0.0", port=int(sys.argv[1]), debug=False)
