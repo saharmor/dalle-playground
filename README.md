@@ -18,7 +18,7 @@ You can tinker with the DALL-E playground using a Github-hosted frontend. Follow
 3. **Wait for the backend to fully load**, this should take ~2min and you should see `--> DALL-E Server is up and running!`
 5. Browse https://saharmor.github.io/dalle-playground/?backendUrl=https://XXXX.loca.lt where the `backendUrl` query parameter should be the url from the previous step
 
-**General note**: while it's possible to run the DALL-E Mini backend on the free tier of Google Colab,
+**General note**: while it is possible to run the DALL-E Mini backend on the free tier of Google Colab,
 generating more than 1-2 images would take more than 1min, which will result in a frontend timeout. Consider upgrading to Colab Pro or run the backend notebook on your stronger ML machine (e.g. AWS EC2). 
 
 ## Using DALL-E Mega
