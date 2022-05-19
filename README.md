@@ -42,7 +42,7 @@ Follow these steps in case you'd like to clone and run the DALL-E playground loc
 
 Requirements:
    - docker & docker-compose 
-   - nvidia-docker
+   - [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) 
 
 1. Clone or fork this repository
 2. start server `docker-compose up`, add `-d` to `docker-compose up` if you'd like to run it in the background
