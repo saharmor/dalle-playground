@@ -40,13 +40,10 @@ Follow these steps in case you'd like to clone and run the DALL-E playground loc
 
 ## Local development with Docker-compose
 
-Requirements:
-   - docker & docker-compose 
-   - [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) 
-
-1. Clone or fork this repository
-2. start server `docker-compose up`, add `-d` to `docker-compose up` if you'd like to run it in the background
-3. The first time will take some time to download the images, models and other dependencies. 
+1. Make sure you have [docker](https://docs.docker.com/get-docker/) and [The NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) installed 
+2. Clone or fork this repository
+3. start server `docker-compose up`, add `-d` to `docker-compose up` if you'd like to run it in the background
+4. The first time will take some time to download the images, models and other dependencies. 
    models and other dependencies are downloaded only once, and then cached.
 4. Copy backend's url from step 2 and paste it in the backend's url input within the web app.
    
