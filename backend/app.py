@@ -16,7 +16,6 @@ from vqgan_jax.modeling_flax_vqgan import VQModel
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
-from tqdm.notebook import trange
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard_prng_key
 
@@ -99,7 +98,7 @@ def generate_images(prompt:str, num_predictions: int):
 
   # generate images
   images = []
-  for i in trange(num_predictions // jax.device_count()):
+  for i in range(num_predictions // jax.device_count()):
       # get a new key
       key, subkey = jax.random.split(key)
       
