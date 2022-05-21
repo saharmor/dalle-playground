@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  app-cache:
+    driver: local
+
+services:
+  dalle-backend:
+    container_name: dalle-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - app-cache:/root/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ gpu ]
+  dalle-interface:
+    container_name: dalle-interface
+    build:
+      context: ./interface
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true

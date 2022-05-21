@@ -38,6 +38,20 @@ Follow these steps in case you'd like to clone and run the DALL-E playground loc
    it `npm start`
 7. Copy backend's url from step 5 and paste it in the backend's url input within the web app
 
+## Local development with Docker-compose
+
+Requirements:
+   - docker & docker-compose 
+   - [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) 
+
+1. Clone or fork this repository
+2. start server `docker-compose up`, add `-d` to `docker-compose up` if you'd like to run it in the background
+3. The first time will take some time to download the images, models and other dependencies. 
+   models and other dependencies are downloaded only once, and then cached.
+4. Copy backend's url from step 2 and paste it in the backend's url input within the web app.
+   
+   webapp at `http://localhost:3000/dalle-playground`
+
 ## Acknowledgements
 
 This repo is a full-stack flavour of [Boris Dayma's](https://github.com/borisdayma) DALL-E Mini
