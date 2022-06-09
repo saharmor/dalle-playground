@@ -22,7 +22,7 @@ You can tinker with the DALL-E playground using a Github-hosted frontend. Follow
 generating more than 1-2 images would take more than 1min, which will result in a frontend timeout. Consider upgrading to Colab Pro or run the backend notebook on your stronger ML machine (e.g. AWS EC2). 
 
 ## Using DALL-E Mega
-DALL-E Mega is substianlly more capable than DALL-E Mini and therefore generates higher fidelity images. If you have the computing power--either through a Google Colab Pro+ subcription or by having a strong local machine, uncomment [this line](https://github.com/saharmor/dalle-playground/blob/2cffe123325910ff266185b653841c65f227c69f/backend/app.py#L38) before running the backend.
+DALL-E Mega is substianlly more capable than DALL-E Mini and therefore generates higher fidelity images. If you have the computing power--either through a Google Colab Pro+ subcription or by having a strong local machine, you can run DALL-E Mega locally. To do it, run the app.py script in step 5 of the guide below  with `mega` as the second parameter: `python app.py 8080 mega`
 
 ## Local development
 
