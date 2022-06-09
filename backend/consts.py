@@ -14,7 +14,7 @@ VQGAN_COMMIT_ID = "e93a26e7707683d349bf5d5c41c5b0ef69b677a9"
 GEN_TOP_K = None
 GEN_TOP_P = None
 TEMPERATURE  = None
-COND_SCALE = 3.0
+COND_SCALE = 10.0
 
 class ModelSize(Enum):
     MINI = "Mini"
