@@ -134,7 +134,7 @@ const App = ({classes}) => {
                             <FormControl className={classes.imagesPerQueryControl}
                                          variant="outlined">
                                 <InputLabel id="images-per-query-label">
-                                    Images per query
+                                    Images to generate
                                 </InputLabel>
                                 <Select labelId="images-per-query-label"
                                         label="Images per query" value={imagesPerQuery}
