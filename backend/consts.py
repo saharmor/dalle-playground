@@ -17,5 +17,5 @@ TEMPERATURE  = None
 COND_SCALE = 3.0
 
 class ModelSize(Enum):
-    MINI = "mini"
-    MEGA = "mega"
+    MINI = "Mini"
+    MEGA = "Mega"

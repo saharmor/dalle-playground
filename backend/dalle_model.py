@@ -17,16 +17,16 @@ from flax.training.common_utils import shard_prng_key
 
 import wandb
 
-from backend.consts import COND_SCALE, DALLE_COMMIT_ID, DALLE_MODEL_MEGA, DALLE_MODEL_MINI, GEN_TOP_K, GEN_TOP_P, TEMPERATURE, VQGAN_COMMIT_ID, VQGAN_REPO, ModelSize
+from consts import COND_SCALE, DALLE_COMMIT_ID, DALLE_MODEL_MEGA, DALLE_MODEL_MINI, GEN_TOP_K, GEN_TOP_P, TEMPERATURE, VQGAN_COMMIT_ID, VQGAN_REPO, ModelSize
 
 os.environ["XLA_PYTHON_CLIENT_ALLOCATOR"] = "platform" # https://github.com/saharmor/dalle-playground/issues/14#issuecomment-1147849318
 os.environ["WANDB_SILENT"] = "true"
 wandb.init(anonymous="must")
 
 # model inference
-@partial(jax.pmap, axis_name="batch", static_broadcasted_argnums=(4, 5, 6, 7))
+@partial(jax.pmap, axis_name="batch", static_broadcasted_argnums=(3, 4, 5, 6, 7))
 def p_generate(
-    model, tokenized_prompt, key, params, top_k, top_p, temperature, condition_scale
+    tokenized_prompt, key, params, top_k, top_p, temperature, condition_scale, model
 ):
     return model.generate(
         **tokenized_prompt,
@@ -40,7 +40,7 @@ def p_generate(
 
 
 # decode images
-@partial(jax.pmap, axis_name="batch")
+@partial(jax.pmap, axis_name="batch", static_broadcasted_argnums=(0))
 def p_decode(vqgan, indices, params):
     return vqgan.decode_code(indices, params=params)
 
@@ -84,28 +84,26 @@ class DalleModel:
 
         # generate images
         images = []
-        for i in range(num_predictions // jax.device_count()):
+        for i in range(max(num_predictions // jax.device_count(), 1)):
             # get a new key
             key, subkey = jax.random.split(key)
 
-            model, params = DalleBart.from_pretrained(DALLE_MODEL_MINI, revision=DALLE_COMMIT_ID, dtype=jnp.float32, _do_init=False)
-            # generate images
             encoded_images = p_generate(
-                model,
                 tokenized_prompt,
                 shard_prng_key(subkey),
-                params,
+                self.params,
                 GEN_TOP_K,
                 GEN_TOP_P,
                 TEMPERATURE,
                 COND_SCALE,
+                self.model
             )
 
             # remove BOS
             encoded_images = encoded_images.sequences[..., 1:]
 
             # decode images
-            decoded_images = p_decode(encoded_images, self.vqgan_params)
+            decoded_images = p_decode(self.vqgan, encoded_images, self.vqgan_params)
             decoded_images = decoded_images.clip(0.0, 1.0).reshape((-1, 256, 256, 3))
             for img in decoded_images:
                 images.append(Image.fromarray(np.asarray(img * 255, dtype=np.uint8)))

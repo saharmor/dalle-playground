@@ -2,18 +2,15 @@ import base64
 import sys
 from io import BytesIO
 
-import jax
-import jax.numpy as jnp
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from backend.consts import ModelSize
+from consts import ModelSize
 
 app = Flask(__name__)
 CORS(app)
 print("--> Starting DALL-E Server. This might take up to two minutes.")
 
-from backend.dalle_model import DalleModel
+from dalle_model import DalleModel
 dalle_model = None
 
 
@@ -43,9 +40,14 @@ def health_check():
 
 
 with app.app_context():
-    dalle_model = DalleModel(ModelSize.MINI)
+    try:
+        dalle_version = ModelSize[sys.argv[2].upper()]
+    except (KeyError, IndexError):
+        dalle_version = ModelSize.MINI
+    dalle_model = DalleModel(dalle_version)
     dalle_model.generate_images("warm-up", 1)
     print("--> DALL-E Server is up and running!")
+    print("--> Model selected - DALL-E {dalle_version}")
 
 
 if __name__ == "__main__":
