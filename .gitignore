@@ -1,0 +1,4 @@
+/venv
+/wandb
+/.vscode
+/backend/__pycache__
