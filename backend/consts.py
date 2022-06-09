@@ -19,3 +19,4 @@ COND_SCALE = 10.0
 class ModelSize(Enum):
     MINI = "Mini"
     MEGA = "Mega"
+    MEGA_FULL = "Mega_full"

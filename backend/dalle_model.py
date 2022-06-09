@@ -50,6 +50,9 @@ class DalleModel:
         if model_version == ModelSize.MINI:
             dalle_model = DALLE_MODEL_MINI
             dtype = jnp.float32
+        elif model_version == ModelSize.MEGA_FULL :
+            dalle_model = DALLE_MODEL_MEGA_FULL
+            dtype = jnp.float32
         else:
             dalle_model = DALLE_MODEL_MEGA
             dtype = jnp.float16
