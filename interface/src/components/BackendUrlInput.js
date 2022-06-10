@@ -4,8 +4,8 @@ import qs from 'qs';
 import { useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 
-import { checkIfValidBackend } from './backend_api';
-import { isValidURL } from './utils';
+import { checkIfValidBackend } from '../api/backend_api';
+import { isValidURL } from '../utils';
 
 const useStyles = () => ({
   inputBackend: {

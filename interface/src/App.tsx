@@ -1,6 +1,7 @@
 import {
   Card,
   CardContent,
+  createStyles,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -8,65 +9,66 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, { useState } from 'react';
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import React, { FC, useState } from 'react';
 
-import { callDalleService } from './backend_api';
-import BackendUrlInput from './BackendUrlInput';
-import GeneratedImageList from './GeneratedImageList';
-import LoadingSpinner from './LoadingSpinner';
-import TextPromptInput from './TextPromptInput';
+import { callDalleService } from './api/backend_api';
+import BackendUrlInput from './components/BackendUrlInput';
+import GeneratedImageList from './components/GeneratedImageList';
+import LoadingSpinner from './components/LoadingSpinner';
+import TextPromptInput from './components/TextPromptInput';
 
-import './App.css';
+const useStyles = () =>
+  createStyles({
+    root: {
+      display: 'flex',
+      width: '100%',
+      flexDirection: 'column',
+      margin: '60px 0px 60px 0px',
+      alignItems: 'center',
+      textAlign: 'center',
+    },
+    title: {
+      marginBottom: '20px',
+    },
+    playgroundSection: {
+      display: 'flex',
+      flex: 1,
+      width: '100%',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      marginTop: '20px',
+    },
+    settingsSection: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '1em',
+      maxWidth: '300px',
+    },
+    searchQueryCard: {
+      marginBottom: '20px',
+    },
+    imagesPerQueryControl: {
+      marginTop: '20px',
+    },
+    formControl: {
+      margin: '20px',
+      minWidth: 120,
+    },
+    gallery: {
+      display: 'flex',
+      flex: '1',
+      maxWidth: '50%',
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      padding: '1rem',
+    },
+  });
 
-const useStyles = () => ({
-  root: {
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'column',
-    margin: '60px 0px 60px 0px',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-  title: {
-    marginBottom: '20px',
-  },
-  playgroundSection: {
-    display: 'flex',
-    flex: 1,
-    width: '100%',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginTop: '20px',
-  },
-  settingsSection: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1em',
-    maxWidth: '300px',
-  },
-  searchQueryCard: {
-    marginBottom: '20px',
-  },
-  imagesPerQueryControl: {
-    marginTop: '20px',
-  },
-  formControl: {
-    margin: '20px',
-    minWidth: 120,
-  },
-  gallery: {
-    display: 'flex',
-    flex: '1',
-    maxWidth: '50%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: '1rem',
-  },
-});
+interface Props extends WithStyles<typeof useStyles> {}
 
-const App = ({ classes }) => {
+const App: FC<Props> = ({ classes }) => {
   const [backendUrl, setBackendUrl] = useState('');
   const [isFetchingImgs, setIsFetchingImgs] = useState(false);
   const [isCheckingBackendEndpoint, setIsCheckingBackendEndpoint] = useState(false);
@@ -79,7 +81,7 @@ const App = ({ classes }) => {
   const imagesPerQueryOptions = 10;
   const validBackendUrl = isValidBackendEndpoint && backendUrl;
 
-  function enterPressedCallback(promptText) {
+  function enterPressedCallback(promptText: string) {
     console.log(`API call to DALL-E web service with the following prompt [${promptText}]`);
     setApiError('');
     setIsFetchingImgs(true);
@@ -163,7 +165,7 @@ const App = ({ classes }) => {
                   label="Images per query"
                   value={imagesPerQuery}
                   disabled={isFetchingImgs}
-                  onChange={(event) => setImagesPerQuery(event.target.value)}
+                  onChange={(event) => setImagesPerQuery(parseInt(event.target.value as string))}
                 >
                   {Array.from(Array(imagesPerQueryOptions).keys()).map((num) => {
                     return (
