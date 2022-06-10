@@ -12,6 +12,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:jsx-a11y/recommended',
     'plugin:import/typescript',
+    'stylelint',
   ],
   settings: {
     'import/resolver': {

@@ -20,6 +20,8 @@
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.12.0",
+    "stylelint": "^14.9.0",
+    "stylelint-config-standard": "^26.0.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
@@ -50,10 +52,17 @@
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-config-stylelint": "^15.1.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gh-pages": "^4.0.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "prettier-eslint": "^15.0.1",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended": "^8.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-order": "^5.0.0"
   }
 }
