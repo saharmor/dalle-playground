@@ -11,6 +11,8 @@ import {
   Typography,
   Container,
   Grid,
+  CardActions,
+  Button,
 } from '@material-ui/core';
 
 import { callDalleService } from 'api/backend_api';
@@ -107,6 +109,11 @@ const App: FC = () => {
                 </Select>
                 <FormHelperText>More images = slower query</FormHelperText>
               </FormControl>
+              <CardActions>
+                <Button variant="contained" color="primary" fullWidth>
+                  Submit
+                </Button>
+              </CardActions>
             </CardContent>
           </Card>
           {queryTime !== 0 && (
