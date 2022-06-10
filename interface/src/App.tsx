@@ -89,7 +89,6 @@ const App: FC = () => {
                 enterPressedCallback={enterPressedCallback}
                 disabled={isFetchingImgs || !validBackendUrl}
               />
-
               <FormControl variant="outlined">
                 <InputLabel id="images-per-query-label">Images to generate</InputLabel>
                 <Select
