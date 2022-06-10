@@ -116,17 +116,13 @@ const App: FC = () => {
           )}
         </Grid>
         <Grid item xs={8}>
-          {(generatedImages.length > 0 || apiError || isFetchingImgs) && (
-            <>
-              {!!apiError && (
-                <Typography variant="h5" color="error">
-                  {apiError}
-                </Typography>
-              )}
-              {isFetchingImgs && <LoadingSpinner searchTerm={''} isLoading={isFetchingImgs} />}
-              {generatedImages && <GeneratedImageList generatedImages={generatedImages} />}
-            </>
+          {!!apiError && (
+            <Typography variant="h5" color="error">
+              {apiError}
+            </Typography>
           )}
+          {isFetchingImgs && <LoadingSpinner searchTerm={''} isLoading={isFetchingImgs} />}
+          {generatedImages.length > 0 && <GeneratedImageList generatedImages={generatedImages} />}
         </Grid>
       </Grid>
     </Container>
