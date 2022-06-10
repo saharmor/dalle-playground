@@ -1,22 +1,22 @@
+import React, { FC, useState } from 'react';
+
 import {
   Card,
   CardContent,
-  createStyles,
   FormControl,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select,
   Typography,
+  createStyles,
 } from '@material-ui/core';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import React, { FC, useState } from 'react';
-
-import { callDalleService } from './api/backend_api';
-import BackendUrlInput from './components/BackendUrlInput';
-import GeneratedImageList from './components/GeneratedImageList';
-import LoadingSpinner from './components/LoadingSpinner';
-import TextPromptInput from './components/TextPromptInput';
+import { callDalleService } from 'api/backend_api';
+import BackendUrlInput from 'components/BackendUrlInput';
+import GeneratedImageList from 'components/GeneratedImageList';
+import LoadingSpinner from 'components/LoadingSpinner';
+import TextPromptInput from 'components/TextPromptInput';
 
 const useStyles = () =>
   createStyles({

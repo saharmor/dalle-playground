@@ -1,23 +1,28 @@
-import { TextField } from '@material-ui/core';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
+import { TextField, createStyles } from '@material-ui/core';
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+const useStyles = () =>
+  createStyles({
+    inputPrompt: {
+      marginTop: '20px',
+    },
+  });
 
-const useStyles = () => ({
-  inputPrompt: {
-    marginTop: '20px',
-  },
-});
+interface Props extends WithStyles<typeof useStyles> {
+  enterPressedCallback: (query: string) => void;
+  disabled: boolean;
+}
 
-const TextPromptInput = ({ classes, enterPressedCallback, disabled }) => {
+const TextPromptInput: FC<Props> = ({ classes, enterPressedCallback, disabled }) => {
   const [promptText, setPromptText] = useState('');
 
-  function handleTextPromptKeyPressed(event) {
+  function handleTextPromptKeyPressed(event: any) {
     if (event.key === 'Enter') {
       enterPressedCallback(promptText);
     }
   }
 
-  function onTextChanged(event) {
+  function onTextChanged(event: any) {
     setPromptText(event.target.value);
   }
 

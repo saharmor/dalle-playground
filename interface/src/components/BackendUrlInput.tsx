@@ -1,22 +1,31 @@
-import { Grid, TextField } from '@material-ui/core';
-import withStyles from '@material-ui/core/styles/withStyles';
-import qs from 'qs';
-import { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
+import { Grid, TextField, createStyles } from '@material-ui/core';
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import qs from 'qs';
+import { isValidURL } from 'utils';
+import { checkIfValidBackend } from 'api/backend_api.js';
 
-import { checkIfValidBackend } from '../api/backend_api';
-import { isValidURL } from '../utils';
+const useStyles = () =>
+  createStyles({
+    inputBackend: {
+      minWidth: '220px',
+    },
+    loadingSpinner: {
+      paddingTop: '20px !important',
+    },
+  });
 
-const useStyles = () => ({
-  inputBackend: {
-    minWidth: '220px',
-  },
-  loadingSpinner: {
-    paddingTop: '20px !important',
-  },
-});
+interface Props extends WithStyles<typeof useStyles> {
+  disabled: boolean;
+  setBackendValidUrl: (validURL: string) => void;
+  isValidBackendEndpoint: boolean;
+  setIsValidBackendEndpoint: (isValid: boolean) => void;
+  isCheckingBackendEndpoint: boolean;
+  setIsCheckingBackendEndpoint: (isChecking: boolean) => void;
+}
 
-const BackendUrlInput = ({
+const BackendUrlInput: FC<Props> = ({
   classes,
   disabled,
   setBackendValidUrl,
@@ -28,14 +37,16 @@ const BackendUrlInput = ({
   const [backendUrl, setBackendUrl] = useState('');
 
   useEffect(() => {
-    const qsBackendUrl = qs.parse(window.location.search, { ignoreQueryPrefix: true }).backendUrl;
+    const qsBackendUrl = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    }).backendUrl as string;
 
     if (qsBackendUrl) {
       onChange(qsBackendUrl);
     }
   }, [setBackendUrl]);
 
-  function onChange(newBackendUrl) {
+  function onChange(newBackendUrl: string) {
     if (isValidURL(newBackendUrl)) {
       setIsCheckingBackendEndpoint(true);
       checkIfValidBackend(newBackendUrl)
@@ -77,12 +88,7 @@ const BackendUrlInput = ({
       </Grid>
       {isCheckingBackendEndpoint && (
         <Grid item className={classes.loadingSpinner} xs={2}>
-          <PulseLoader
-            sizeUnit={'px'}
-            size={5}
-            color="purple"
-            loading={isCheckingBackendEndpoint}
-          />
+          <PulseLoader size={5} loading={isCheckingBackendEndpoint} />
         </Grid>
       )}
     </Grid>
