@@ -5,6 +5,7 @@ from io import BytesIO
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from consts import ModelSize
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -24,7 +25,10 @@ def generate_images_api():
 
     generated_images = []
     for img in generated_imgs:
+        now = datetime.now().time()
+        imgname = f"{text_prompt}_{dalle_version}_{now}"
         buffered = BytesIO()
+        img.save(imgname, format="JPEG")
         img.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
         generated_images.append(img_str)
