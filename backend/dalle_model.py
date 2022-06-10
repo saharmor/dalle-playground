@@ -47,16 +47,17 @@ def p_decode(vqgan, indices, params):
 
 class DalleModel:
     def __init__(self, model_version: ModelSize) -> None:
-        if model_version == ModelSize.MINI:
-            dalle_model = DALLE_MODEL_MINI
-            dtype = jnp.float32
-        elif model_version == ModelSize.MEGA_FULL :
+        if model_version == ModelSize.DALLE_MODEL_MEGA_FULL:
             dalle_model = DALLE_MODEL_MEGA_FULL
-            dtype = jnp.float32
-        else:
+            dtype = jnp.float16
+        elif model_version == ModelSize.MEGA:
             dalle_model = DALLE_MODEL_MEGA
             dtype = jnp.float16
-
+        else:
+            dalle_model = DALLE_MODEL_MINI
+            dtype = jnp.float32
+            
+            
         # Load dalle-mini
         self.model, params = DalleBart.from_pretrained(
             dalle_model, revision=DALLE_COMMIT_ID, dtype=dtype, _do_init=False
