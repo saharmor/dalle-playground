@@ -18,7 +18,7 @@ const GeneratedImageList = ({classes, generatedImages, textPromptText}) => {
             {generatedImages.map((generatedImg, index) => {
                 return (
                     <Grid item key={index}>
-                        <a href={generatedImg} alt={textPromptText index} title={textPromptText index} download={textPromptText index + '.png'}>
+                        <a href={generatedImg} alt={"Generated image" textPromptText index} title={"Click to download" textPromptText index} download={textPromptText index".png"}>
                            <ImageObject imgData={generatedImg} alt={textPromptText index} title={textPromptText index} />
                         <a>   
                     </Grid>
