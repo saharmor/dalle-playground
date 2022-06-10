@@ -58,22 +58,6 @@ const App: FC = () => {
       });
   }
 
-  function getGalleryContent() {
-    if (apiError) {
-      return (
-        <Typography variant="h5" color="error">
-          {apiError}
-        </Typography>
-      );
-    }
-
-    if (isFetchingImgs) {
-      return <LoadingSpinner isLoading={isFetchingImgs} />;
-    }
-
-    return <GeneratedImageList generatedImages={generatedImages} />;
-  }
-
   return (
     <Container>
       <Grid container spacing={2}>
@@ -133,7 +117,15 @@ const App: FC = () => {
         </Grid>
         <Grid item xs={8}>
           {(generatedImages.length > 0 || apiError || isFetchingImgs) && (
-            <div>{getGalleryContent()}</div>
+            <>
+              {!!apiError && (
+                <Typography variant="h5" color="error">
+                  {apiError}
+                </Typography>
+              )}
+              {isFetchingImgs && <LoadingSpinner searchTerm={''} isLoading={isFetchingImgs} />}
+              {generatedImages && <GeneratedImageList generatedImages={generatedImages} />}
+            </>
           )}
         </Grid>
       </Grid>

@@ -21,9 +21,10 @@ const processingSteps = ['Generating images 👨🏽‍🎨', 'Doing fancy calcu
 
 interface Props extends WithStyles<typeof useStyles> {
   isLoading: boolean;
+  searchTerm: string;
 }
 
-const LoadingSpinner: FC<Props> = ({ classes, isLoading }) => {
+const LoadingSpinner: FC<Props> = ({ classes, isLoading, searchTerm }) => {
   const [textIdx, setTextIdx] = useState(0);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const LoadingSpinner: FC<Props> = ({ classes, isLoading }) => {
   return (
     <div className={classes.root}>
       <PulseLoader size={20} loading={isLoading} />
+      {searchTerm}
       <Typography className={classes.loadingText} variant={'h6'}>
         {loadingText}
       </Typography>
