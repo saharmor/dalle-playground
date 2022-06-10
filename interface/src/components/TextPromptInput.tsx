@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react';
+
 import { TextField, createStyles } from '@material-ui/core';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+
 const useStyles = () =>
   createStyles({
     inputPrompt: {

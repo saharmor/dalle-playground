@@ -28,7 +28,7 @@ const LoadingSpinner: FC<Props> = ({ classes, isLoading }) => {
 
   useEffect(() => {
     const intervalID = setTimeout(() => {
-      let currentIdx = textIdx;
+      const currentIdx = textIdx;
 
       if (currentIdx + 1 < processingSteps.length) {
         setTextIdx(currentIdx + 1);

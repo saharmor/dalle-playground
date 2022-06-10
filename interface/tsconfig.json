@@ -1,26 +1,37 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    // "target": "es5",
+    // "lib": [
+    //   "dom",
+    //   "dom.iterable",
+    //   "esnext"
+    // ],
+    // "allowJs": true,
+    // "skipLibCheck": true,
+    // "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    // "strict": true,
+    // "forceConsistentCasingInFileNames": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "module": "esnext",
+    // "resolveJsonModule": true,
+    // "isolatedModules": true,
+    // "noEmit": true,
+    "jsx": "react-jsx",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "baseUrl": "src",
+    // "sourceMap": true,
+    // "inlineSources": true,
+    // "sourceRoot": "./src",
+    // "importHelpers": true,
+    // "downlevelIteration": true,
+    // "strictNullChecks": true,
+    // "strictPropertyInitialization": true,
+    // "strictFunctionTypes": true,
+    // "strictBindCallApply": true,
+    // "alwaysStrict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

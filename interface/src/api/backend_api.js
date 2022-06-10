@@ -16,12 +16,12 @@ export async function callDalleService(backendUrl, text, numImages) {
           text,
           num_images: numImages,
         }),
-      }).then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
+      }).then((resp) => {
+        if (!resp.ok) {
+          throw Error(resp.statusText);
         }
 
-        return response;
+        return resp;
       })
     ).text(),
     new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), REQUEST_TIMEOUT_SEC)),
@@ -40,7 +40,7 @@ export async function checkIfValidBackend(backendUrl) {
       mode: 'no-cors',
     },
   })
-    .then((response) => {
+    .then(() => {
       return true;
     })
     .catch(() => {

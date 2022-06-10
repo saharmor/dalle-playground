@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
+
 import { Grid, TextField, createStyles } from '@material-ui/core';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import qs from 'qs';
+
+import { checkIfValidBackend } from 'api/backend_api';
 import { isValidURL } from 'utils';
-import { checkIfValidBackend } from 'api/backend_api.js';
 
 const useStyles = () =>
   createStyles({
@@ -50,7 +52,7 @@ const BackendUrlInput: FC<Props> = ({
     if (isValidURL(newBackendUrl)) {
       setIsCheckingBackendEndpoint(true);
       checkIfValidBackend(newBackendUrl)
-        .then((isValid) => {
+        .then((isValid: any) => {
           setIsValidBackendEndpoint(isValid);
 
           if (isValid) {

@@ -12,6 +12,7 @@ import {
   createStyles,
 } from '@material-ui/core';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+
 import { callDalleService } from 'api/backend_api';
 import BackendUrlInput from 'components/BackendUrlInput';
 import GeneratedImageList from 'components/GeneratedImageList';
@@ -66,7 +67,7 @@ const useStyles = () =>
     },
   });
 
-interface Props extends WithStyles<typeof useStyles> {}
+type Props = WithStyles<typeof useStyles>;
 
 const App: FC<Props> = ({ classes }) => {
   const [backendUrl, setBackendUrl] = useState('');
@@ -82,17 +83,17 @@ const App: FC<Props> = ({ classes }) => {
   const validBackendUrl = isValidBackendEndpoint && backendUrl;
 
   function enterPressedCallback(promptText: string) {
-    console.log(`API call to DALL-E web service with the following prompt [${promptText}]`);
+    window.console.log(`API call to DALL-E web service with the following prompt [${promptText}]`);
     setApiError('');
     setIsFetchingImgs(true);
     callDalleService(backendUrl, promptText, imagesPerQuery)
-      .then((response) => {
+      .then((response: any) => {
         setQueryTime(response.executionTime);
         setGeneratedImages(response.generatedImgs);
         setIsFetchingImgs(false);
       })
-      .catch((error) => {
-        console.log('Error querying DALL-E service.', error);
+      .catch((error: any) => {
+        window.console.log('Error querying DALL-E service.', error);
 
         if (error.message === 'Timeout') {
           setApiError(
