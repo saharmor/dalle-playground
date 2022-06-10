@@ -1,100 +1,78 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { memo, FC, useCallback, useContext, useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 
-import { Grid, TextField, createStyles } from '@material-ui/core';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import qs from 'qs';
+import { Grid, TextField } from '@material-ui/core';
 
-import { checkIfValidBackend } from 'api/backend_api';
-import { isValidURL } from 'utils';
+import { validateDalleServer } from 'api/backend_api';
+import { FormContext } from 'contexts/FormContext';
+import { validateURL } from 'utils';
 
-const useStyles = () =>
-  createStyles({
-    inputBackend: {
-      minWidth: '220px',
+type Props = {
+  isDisabled: boolean;
+};
+
+const BackendUrlInput: FC<Props> = ({ isDisabled }) => {
+  const { backendURL, setBackendURL, isValidURL, setIsValidURL } = useContext(FormContext);
+
+  const [inputValue, setInputValue] = useState(backendURL);
+  const [isCheckingURL, setIsCheckingURL] = useState(false);
+
+  const hasError = !isValidURL && !!inputValue;
+  const helperText = hasError ? 'No running DALL-E server with this URL' : '';
+
+  const handleOnChange = useCallback(
+    async (newURL: string) => {
+      setIsCheckingURL(true);
+      setInputValue(newURL);
+
+      try {
+        if (!validateURL(newURL)) {
+          throw Error('Not a valid URL');
+        }
+
+        const response = await validateDalleServer(newURL);
+
+        if (!response.ok) {
+          throw Error('HTTP error');
+        }
+
+        setIsValidURL(true);
+        setBackendURL(newURL);
+      } catch (err) {
+        window.console.error(err);
+        setIsValidURL(false);
+      } finally {
+        setIsCheckingURL(false);
+      }
     },
-    loadingSpinner: {
-      paddingTop: '20px !important',
-    },
-  });
-
-interface Props extends WithStyles<typeof useStyles> {
-  disabled: boolean;
-  setBackendValidUrl: (validURL: string) => void;
-  isValidBackendEndpoint: boolean;
-  setIsValidBackendEndpoint: (isValid: boolean) => void;
-  isCheckingBackendEndpoint: boolean;
-  setIsCheckingBackendEndpoint: (isChecking: boolean) => void;
-}
-
-const BackendUrlInput: FC<Props> = ({
-  classes,
-  disabled,
-  setBackendValidUrl,
-  isValidBackendEndpoint,
-  setIsValidBackendEndpoint,
-  isCheckingBackendEndpoint,
-  setIsCheckingBackendEndpoint,
-}) => {
-  const [backendUrl, setBackendUrl] = useState('');
+    [setIsCheckingURL, setBackendURL, setIsValidURL, setInputValue],
+  );
 
   useEffect(() => {
-    const qsBackendUrl = qs.parse(window.location.search, {
-      ignoreQueryPrefix: true,
-    }).backendUrl as string;
-
-    if (qsBackendUrl) {
-      onChange(qsBackendUrl);
-    }
-  }, [setBackendUrl]);
-
-  function onChange(newBackendUrl: string) {
-    if (isValidURL(newBackendUrl)) {
-      setIsCheckingBackendEndpoint(true);
-      checkIfValidBackend(newBackendUrl)
-        .then((isValid: any) => {
-          setIsValidBackendEndpoint(isValid);
-
-          if (isValid) {
-            setBackendValidUrl(newBackendUrl);
-          }
-
-          setIsCheckingBackendEndpoint(false);
-        })
-        .catch(() => {
-          setIsCheckingBackendEndpoint(false);
-        });
-    } else {
-      setIsValidBackendEndpoint(false);
-    }
-
-    setBackendUrl(newBackendUrl);
-  }
+    handleOnChange(backendURL);
+  }, [handleOnChange, backendURL]);
 
   return (
-    <Grid container spacing={1} alignContent="center">
-      <Grid item xs={10}>
-        <TextField
-          className={classes.inputBackend}
-          fullWidth
-          id="standard-basic"
-          label="Backend URL"
-          value={backendUrl}
-          disabled={disabled}
-          error={!isValidBackendEndpoint && backendUrl !== ''}
-          helperText={
-            !isValidBackendEndpoint && backendUrl !== '' && 'No running DALL-E server with this URL'
-          }
-          onChange={(event) => onChange(event.target.value)}
-        />
-      </Grid>
-      {isCheckingBackendEndpoint && (
-        <Grid item className={classes.loadingSpinner} xs={2}>
-          <PulseLoader size={5} loading={isCheckingBackendEndpoint} />
-        </Grid>
-      )}
-    </Grid>
+    <TextField
+      id="standard-basic"
+      label="Backend URL"
+      value={inputValue}
+      disabled={isDisabled}
+      error={hasError}
+      helperText={helperText}
+      onChange={(event) => handleOnChange(event.target.value)}
+      InputProps={{
+        endAdornment: isCheckingURL && (
+          <Grid item xs={2}>
+            <PulseLoader size={5} />
+          </Grid>
+        ),
+      }}
+      fullWidth
+    />
   );
 };
 
-export default withStyles(useStyles)(BackendUrlInput);
+BackendUrlInput.displayName = 'BackendUrlInput';
+
+export default memo(BackendUrlInput);

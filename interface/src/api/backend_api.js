@@ -33,17 +33,10 @@ export async function callDalleService(backendUrl, text, numImages) {
   };
 }
 
-export async function checkIfValidBackend(backendUrl) {
-  return await fetch(backendUrl, {
+export const validateDalleServer = (backendUrl) =>
+  fetch(backendUrl, {
     headers: {
       'Bypass-Tunnel-Reminder': 'go',
       mode: 'no-cors',
     },
-  })
-    .then(() => {
-      return true;
-    })
-    .catch(() => {
-      return false;
-    });
-}
+  });

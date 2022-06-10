@@ -3,11 +3,6 @@ import React, { FC, useState } from 'react';
 import {
   Card,
   CardContent,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
   Typography,
   Container,
   Grid,
@@ -19,20 +14,19 @@ import { callDalleService } from 'api/backend_api';
 import BackendUrlInput from 'components/BackendUrlInput';
 import GeneratedImageList from 'components/GeneratedImageList';
 import Header from 'components/Header';
+import ImagesPerQuerySelect from 'components/ImagesPerQuerySelect';
 import LoadingSpinner from 'components/LoadingSpinner';
 import TextPromptInput from 'components/TextPromptInput';
 
 const App: FC = () => {
-  const [backendUrl, setBackendUrl] = useState('');
+  const [backendUrl] = useState('');
   const [isFetchingImgs, setIsFetchingImgs] = useState(false);
-  const [isCheckingBackendEndpoint, setIsCheckingBackendEndpoint] = useState(false);
-  const [isValidBackendEndpoint, setIsValidBackendEndpoint] = useState(true);
+  const [isValidBackendEndpoint] = useState(true);
   const [generatedImages, setGeneratedImages] = useState([]);
   const [apiError, setApiError] = useState('');
-  const [imagesPerQuery, setImagesPerQuery] = useState(2);
+  const [imagesPerQuery] = useState(2);
   const [queryTime, setQueryTime] = useState(0);
 
-  const imagesPerQueryOptions = 10;
   const validBackendUrl = isValidBackendEndpoint && backendUrl;
 
   function enterPressedCallback(promptText: string) {
@@ -77,37 +71,12 @@ const App: FC = () => {
         <Grid item xs={4}>
           <Card>
             <CardContent>
-              <BackendUrlInput
-                setBackendValidUrl={setBackendUrl}
-                isValidBackendEndpoint={isValidBackendEndpoint}
-                setIsValidBackendEndpoint={setIsValidBackendEndpoint}
-                setIsCheckingBackendEndpoint={setIsCheckingBackendEndpoint}
-                isCheckingBackendEndpoint={isCheckingBackendEndpoint}
-                disabled={isFetchingImgs}
-              />
+              <BackendUrlInput isDisabled={isFetchingImgs} />
               <TextPromptInput
                 enterPressedCallback={enterPressedCallback}
                 disabled={isFetchingImgs || !validBackendUrl}
               />
-              <FormControl variant="outlined">
-                <InputLabel id="images-per-query-label">Images to generate</InputLabel>
-                <Select
-                  labelId="images-per-query-label"
-                  label="Images per query"
-                  value={imagesPerQuery}
-                  disabled={isFetchingImgs}
-                  onChange={(event) => setImagesPerQuery(parseInt(event.target.value as string))}
-                >
-                  {Array.from(Array(imagesPerQueryOptions).keys()).map((num) => {
-                    return (
-                      <MenuItem key={num + 1} value={num + 1}>
-                        {num + 1}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-                <FormHelperText>More images = slower query</FormHelperText>
-              </FormControl>
+              <ImagesPerQuerySelect isDisabled={isFetchingImgs} />
               <CardActions>
                 <Button variant="contained" color="primary" fullWidth>
                   Submit
