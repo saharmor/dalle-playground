@@ -8,15 +8,19 @@ const useStyles = () => ({
     },
 });
 
-const GeneratedImageList = ({classes, generatedImages}) => {
-    const ImageObject = ({imgData, alt}) => <img src={`data:image/png;base64,${imgData}`}
-                                                 className={classes.generatedImg} alt={alt}/>
+const GeneratedImageList = ({classes, generatedImages, textPromptText}) => {
+    
+    const ImageObject = ({imgData, alt, title}) => <img src={`data:image/png;base64,${imgData}`}
+                                                 className={classes.generatedImg} alt={alt} title={title}/>
+                                          
     return (
         <Grid container alignItems="center" spacing={3}>
             {generatedImages.map((generatedImg, index) => {
                 return (
                     <Grid item key={index}>
-                        <ImageObject imgData={generatedImg} alt={index}/>
+                        <a href={generatedImg} alt={textPromptText index} title={textPromptText index} download={textPromptText index + '.png'}>
+                           <ImageObject imgData={generatedImg} alt={textPromptText index} title={textPromptText index} />
+                        <a>   
                     </Grid>
                 )
             })}
