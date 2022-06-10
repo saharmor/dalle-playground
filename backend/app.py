@@ -1,3 +1,4 @@
+from dalle_model import DalleModel
 import base64
 import sys
 from io import BytesIO
@@ -10,7 +11,6 @@ app = Flask(__name__)
 CORS(app)
 print("--> Starting DALL-E Server. This might take up to two minutes.")
 
-from dalle_model import DalleModel
 dalle_model = None
 
 
@@ -43,7 +43,7 @@ with app.app_context():
     try:
         dalle_version = ModelSize[sys.argv[2].upper()]
     except (KeyError, IndexError):
-        dalle_version = ModelSize.MINI
+        dalle_version = ModelSize.FULL
     dalle_model = DalleModel(dalle_version)
     dalle_model.generate_images("warm-up", 1)
     print("--> DALL-E Server is up and running!")
