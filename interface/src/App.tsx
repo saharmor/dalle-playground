@@ -9,67 +9,18 @@ import {
   MenuItem,
   Select,
   Typography,
-  createStyles,
+  Container,
+  Grid,
 } from '@material-ui/core';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 
 import { callDalleService } from 'api/backend_api';
 import BackendUrlInput from 'components/BackendUrlInput';
 import GeneratedImageList from 'components/GeneratedImageList';
+import Header from 'components/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import TextPromptInput from 'components/TextPromptInput';
 
-const useStyles = () =>
-  createStyles({
-    root: {
-      display: 'flex',
-      width: '100%',
-      flexDirection: 'column',
-      margin: '60px 0px 60px 0px',
-      alignItems: 'center',
-      textAlign: 'center',
-    },
-    title: {
-      marginBottom: '20px',
-    },
-    playgroundSection: {
-      display: 'flex',
-      flex: 1,
-      width: '100%',
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      marginTop: '20px',
-    },
-    settingsSection: {
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '1em',
-      maxWidth: '300px',
-    },
-    searchQueryCard: {
-      marginBottom: '20px',
-    },
-    imagesPerQueryControl: {
-      marginTop: '20px',
-    },
-    formControl: {
-      margin: '20px',
-      minWidth: 120,
-    },
-    gallery: {
-      display: 'flex',
-      flex: '1',
-      maxWidth: '50%',
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-      padding: '1rem',
-    },
-  });
-
-type Props = WithStyles<typeof useStyles>;
-
-const App: FC<Props> = ({ classes }) => {
+const App: FC = () => {
   const [backendUrl, setBackendUrl] = useState('');
   const [isFetchingImgs, setIsFetchingImgs] = useState(false);
   const [isCheckingBackendEndpoint, setIsCheckingBackendEndpoint] = useState(false);
@@ -124,27 +75,21 @@ const App: FC<Props> = ({ classes }) => {
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.title}>
-        <Typography variant="h3">
-          DALL-E Playground{' '}
-          <span role="img" aria-label="sparks-emoji">
-            ✨
-          </span>
-        </Typography>
-      </div>
+    <Container>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Header />
+        </Grid>
+        {!validBackendUrl && (
+          <Grid item xs={12}>
+            <Typography variant="body1" color="textSecondary">
+              Put your DALL-E backend URL to start
+            </Typography>
+          </Grid>
+        )}
 
-      {!validBackendUrl && (
-        <div>
-          <Typography variant="body1" color="textSecondary">
-            Put your DALL-E backend URL to start
-          </Typography>
-        </div>
-      )}
-
-      <div className={classes.playgroundSection}>
-        <div className={classes.settingsSection}>
-          <Card className={classes.searchQueryCard}>
+        <Grid item xs={4}>
+          <Card>
             <CardContent>
               <BackendUrlInput
                 setBackendValidUrl={setBackendUrl}
@@ -159,7 +104,7 @@ const App: FC<Props> = ({ classes }) => {
                 disabled={isFetchingImgs || !validBackendUrl}
               />
 
-              <FormControl className={classes.imagesPerQueryControl} variant="outlined">
+              <FormControl variant="outlined">
                 <InputLabel id="images-per-query-label">Images to generate</InputLabel>
                 <Select
                   labelId="images-per-query-label"
@@ -185,13 +130,17 @@ const App: FC<Props> = ({ classes }) => {
               Query execution time: {queryTime} sec
             </Typography>
           )}
-        </div>
-        {(generatedImages.length > 0 || apiError || isFetchingImgs) && (
-          <div className={classes.gallery}>{getGalleryContent()}</div>
-        )}
-      </div>
-    </div>
+        </Grid>
+        <Grid item xs={8}>
+          {(generatedImages.length > 0 || apiError || isFetchingImgs) && (
+            <div>{getGalleryContent()}</div>
+          )}
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
-export default withStyles(useStyles)(App);
+App.displayName = 'App';
+
+export default App;

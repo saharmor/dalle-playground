@@ -1,4 +1,4 @@
-export function isValidURL(str) {
+export const isValidURL = (str) => {
   const pattern = new RegExp(
     '^(https?:\\/\\/)?' + // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
@@ -10,4 +10,21 @@ export function isValidURL(str) {
   ); // fragment locator
 
   return Boolean(pattern.test(str));
-}
+};
+
+export const DEFAULT_BACKEND_URL = 'http://127.0.0.1:8080';
+
+export const DEFAULT_IMAGES_PER_QUERY = 1;
+
+export const DEFAULT_MAX_IMAGES_PER_QUERY_OPTIONS = 9;
+
+export const DEFAULT_QUERY_STRING = 'Apple';
+
+export const PROCESSING_STEPS = [
+  'Generating images',
+  'This requires some fancy calculations',
+  'Still processing',
+  "We promise it's worth the wait",
+  "Hang tight, we're almost there",
+  'Loading results, we swear!',
+];
