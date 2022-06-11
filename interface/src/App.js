@@ -101,7 +101,7 @@ const App = ({classes}) => {
             return <LoadingSpinner isLoading={isFetchingImgs}/>
         }
 
-        return <GeneratedImageList generatedImages={generatedImages} textPromptText={promptText} />
+        return <GeneratedImageList generatedImages={generatedImages} promptText={promptText} />
     }
 
     return (
