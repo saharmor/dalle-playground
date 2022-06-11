@@ -1,10 +1,9 @@
-import React, { FC, useCallback, useContext } from 'react';
+import React, { FC, memo, useCallback, useContext } from 'react';
 
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import { FormContext } from 'contexts/FormContext';
-
-import { DEFAULT_MAX_IMAGES_PER_QUERY_OPTIONS } from '../utils.js';
+import { DEFAULT_MAX_IMAGES_PER_QUERY_OPTIONS } from 'utils';
 
 type Props = {
   isDisabled: boolean;
@@ -16,7 +15,11 @@ const ImagesPerQuerySelect: FC<Props> = ({ isDisabled }) => {
   const options = Array.from(Array(DEFAULT_MAX_IMAGES_PER_QUERY_OPTIONS).keys());
 
   const handleOnChange = useCallback(
-    (newQueryLimit: string) => setImagesPerQuery(parseInt(newQueryLimit)),
+    (
+      event: React.ChangeEvent<{
+        value: unknown;
+      }>,
+    ) => setImagesPerQuery(parseInt(event.target.value as string)),
     [setImagesPerQuery],
   );
 
@@ -27,7 +30,7 @@ const ImagesPerQuerySelect: FC<Props> = ({ isDisabled }) => {
         labelId="images-per-query-label"
         label="Images per query"
         value={imagesPerQuery}
-        onChange={(evt) => handleOnChange(evt.target.value as string)}
+        onChange={handleOnChange}
         disabled={isDisabled}
       >
         {options.map((num) => {
@@ -45,4 +48,4 @@ const ImagesPerQuerySelect: FC<Props> = ({ isDisabled }) => {
 
 ImagesPerQuerySelect.displayName = 'ImagesPerQuerySelect';
 
-export default ImagesPerQuerySelect;
+export default memo(ImagesPerQuerySelect);
