@@ -8,7 +8,7 @@ const useStyles = () => ({
     },
 });
 
-const GeneratedImageList = ({classes, generatedImages, textPromptText}) => {
+const GeneratedImageList = ({classes, generatedImages, promptText}) => {
     
     const ImageObject = ({imgData, alt, title}) => <img src={`data:image/png;base64,${imgData}`}
                                                  className={classes.generatedImg} alt={alt} title={title}/>
@@ -18,8 +18,8 @@ const GeneratedImageList = ({classes, generatedImages, textPromptText}) => {
             {generatedImages.map((generatedImg, index) => {
                 return (
                     <Grid item key={index}>
-                        <a href={generatedImg} alt={"Generated image " + textPromptText + " " + index} title={"Click to download " + textPromptText + " " + index} download={textPromptText + "-" + index + ".png"}>
-                           <ImageObject imgData={generatedImg} alt={textPromptText + " " + index} title={textPromptText + " " + index} />
+                        <a href={generatedImg} alt={"Generated image " + promptText + " " + index} title={"Click to download " + promptText + " " + index} download={textPromptText + "-" + index + ".png"}>
+                           <ImageObject imgData={generatedImg} alt={promptText + " " + index} title={promptText + " " + index} />
                         <a>   
                     </Grid>
                 )
