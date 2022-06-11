@@ -79,7 +79,7 @@ const App = () => {
 
   const handleDalleError = useCallback(
     (error) => {
-      console.log('Error querying DALL-E service.', error);
+      window.console.log('Error querying DALL-E service.', error);
       if (error.message === 'Timeout') {
         setApiError(
           'Timeout querying DALL-E service (>1min). Consider reducing the images per query or use a stronger backend.',
@@ -137,7 +137,7 @@ const App = () => {
               <BackendUrlInput isDisabled={isFetchingImgs} />
               <TextPromptInput
                 onEnter={handleOnEnter}
-                disabled={isFetchingImgs || !validatedBackendURL}
+                isDisabled={isFetchingImgs || !validatedBackendURL}
               />
               <ImagesPerQuerySelect isDisabled={isFetchingImgs} />
             </CardContent>
@@ -161,10 +161,10 @@ const App = () => {
         </Grid>
         {!isLoading && !!data.length && <GeneratedImageList generatedImages={data} />}
         {showResults && (
-          <Grid item xs={8} align="center">
+          <Grid item xs={8}>
             {showGallery && (
               <Typography variant="body1" color="textPrimary">
-                Results for: "{queryString}"
+                Results for: &lquot;{queryString}&ldquot;
               </Typography>
             )}
             {!!apiError && (
@@ -172,9 +172,7 @@ const App = () => {
                 {apiError}
               </Typography>
             )}
-            {isFetchingImgs && (
-              <LoadingSpinner searchTerm={queryString} isLoading={isFetchingImgs} />
-            )}
+            {isFetchingImgs && <LoadingSpinner />}
             {showGallery && <GeneratedImageList generatedImages={generatedImages} />}
           </Grid>
         )}
