@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { Typography } from '@material-ui/core';
 
@@ -12,4 +12,4 @@ const Header: FC = () => {
 
 Header.displayName = 'Header';
 
-export default Header;
+export default memo(Header);
