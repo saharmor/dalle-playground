@@ -12,9 +12,9 @@ import {
 
 import { callDalleService } from 'api/backend_api';
 import BackendUrlInput from 'components/BackendUrlInput';
+import ImagesPerQuerySelect from 'components/Form/ImagesPerQuerySelect';
 import GeneratedImageList from 'components/GeneratedImageList';
-import Header from 'components/Header';
-import ImagesPerQuerySelect from 'components/ImagesPerQuerySelect';
+import Header from 'components/Layout/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import TextPromptInput from 'components/TextPromptInput';
 
@@ -96,7 +96,7 @@ const App: FC = () => {
               {apiError}
             </Typography>
           )}
-          {isFetchingImgs && <LoadingSpinner searchTerm={''} isLoading={isFetchingImgs} />}
+          {isFetchingImgs && <LoadingSpinner />}
           {generatedImages.length > 0 && <GeneratedImageList generatedImages={generatedImages} />}
         </Grid>
       </Grid>
