@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
 
 import {
   Card,
@@ -17,8 +17,11 @@ import GeneratedImageList from 'components/GeneratedImageList';
 import Header from 'components/Layout/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import TextPromptInput from 'components/TextPromptInput';
+import { FormContext } from 'contexts/FormContext';
 
 const App: FC = () => {
+  const { queryString } = useContext(FormContext);
+
   const [backendUrl] = useState('');
   const [isFetchingImgs, setIsFetchingImgs] = useState(false);
   const [isValidBackendEndpoint] = useState(true);
@@ -29,11 +32,11 @@ const App: FC = () => {
 
   const validBackendUrl = isValidBackendEndpoint && backendUrl;
 
-  function enterPressedCallback(promptText: string) {
-    window.console.log(`API call to DALL-E web service with the following prompt [${promptText}]`);
+  const handleOnEnter = () => {
+    window.console.log(`API call to DALL-E web service with the following prompt [${queryString}]`);
     setApiError('');
     setIsFetchingImgs(true);
-    callDalleService(backendUrl, promptText, imagesPerQuery)
+    callDalleService(backendUrl, queryString, imagesPerQuery)
       .then((response: any) => {
         setQueryTime(response.executionTime);
         setGeneratedImages(response.generatedImgs);
@@ -52,7 +55,7 @@ const App: FC = () => {
 
         setIsFetchingImgs(false);
       });
-  }
+  };
 
   return (
     <Container>
@@ -73,8 +76,8 @@ const App: FC = () => {
             <CardContent>
               <BackendUrlInput isDisabled={isFetchingImgs} />
               <TextPromptInput
-                enterPressedCallback={enterPressedCallback}
-                disabled={isFetchingImgs || !validBackendUrl}
+                onEnter={handleOnEnter}
+                isDisabled={isFetchingImgs || !validBackendUrl}
               />
               <ImagesPerQuerySelect isDisabled={isFetchingImgs} />
               <CardActions>

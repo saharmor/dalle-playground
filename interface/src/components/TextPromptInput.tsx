@@ -2,7 +2,7 @@ import React, { useCallback, useContext, FC, memo, KeyboardEvent } from 'react';
 
 import { TextField } from '@material-ui/core';
 
-import MyFormContext from '../contexts/FormHandling';
+import { FormContext } from 'contexts/FormContext';
 
 type Props = {
   onEnter: () => void;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const TextPromptInput: FC<Props> = ({ onEnter, isDisabled }) => {
-  const { queryString, setQueryString } = useContext(MyFormContext);
+  const { queryString, setQueryString } = useContext(FormContext);
 
   const handleOnInput = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) =>

@@ -3,16 +3,16 @@ import { PulseLoader } from 'react-spinners';
 
 import { Grid, TextField } from '@material-ui/core';
 
-import { validateDalleServer } from '../backend_api';
-import MyFormContext from '../contexts/FormHandling';
-import { validateURL } from '../utils';
+import { validateDalleServer } from 'api/backend_api';
+import { FormContext } from 'contexts/FormContext';
+import { validateURL } from 'utils';
 
 type Props = {
   isDisabled: boolean;
 };
 
 const BackendUrlInput: FC<Props> = ({ isDisabled }) => {
-  const { backendURL, setBackendURL, isValidURL, setIsValidURL } = useContext(MyFormContext);
+  const { backendURL, setBackendURL, isValidURL, setIsValidURL } = useContext(FormContext);
 
   const [inputValue, setInputValue] = useState(backendURL);
   const [isCheckingURL, setIsCheckingURL] = useState(false);
@@ -39,7 +39,7 @@ const BackendUrlInput: FC<Props> = ({ isDisabled }) => {
         setIsValidURL(true);
         setBackendURL(newURL);
       } catch (err) {
-        console.error(err);
+        window.console.error(err);
         setIsValidURL(false);
       } finally {
         setIsCheckingURL(false);
