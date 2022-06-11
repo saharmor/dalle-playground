@@ -1,47 +1,47 @@
-import React, { FC, useState } from 'react';
+import React, { useCallback, useContext, FC, memo, KeyboardEvent } from 'react';
 
-import { TextField, createStyles } from '@material-ui/core';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import { TextField } from '@material-ui/core';
 
-const useStyles = () =>
-  createStyles({
-    inputPrompt: {
-      marginTop: '20px',
+import MyFormContext from '../contexts/FormHandling';
+
+type Props = {
+  onEnter: () => void;
+  isDisabled: boolean;
+};
+
+const TextPromptInput: FC<Props> = ({ onEnter, isDisabled }) => {
+  const { queryString, setQueryString } = useContext(MyFormContext);
+
+  const handleOnInput = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) =>
+      setQueryString((event.target as HTMLInputElement).value as string),
+    [setQueryString],
+  );
+
+  const handleOnKeyPress = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        onEnter();
+      }
     },
-  });
-
-interface Props extends WithStyles<typeof useStyles> {
-  enterPressedCallback: (query: string) => void;
-  disabled: boolean;
-}
-
-const TextPromptInput: FC<Props> = ({ classes, enterPressedCallback, disabled }) => {
-  const [promptText, setPromptText] = useState('');
-
-  function handleTextPromptKeyPressed(event: any) {
-    if (event.key === 'Enter') {
-      enterPressedCallback(promptText);
-    }
-  }
-
-  function onTextChanged(event: any) {
-    setPromptText(event.target.value);
-  }
+    [onEnter],
+  );
 
   return (
     <TextField
-      className={classes.inputPrompt}
+      value={queryString}
+      onInput={handleOnInput}
+      onKeyPress={handleOnKeyPress}
+      disabled={isDisabled}
       id="prompt-input"
       label="Text prompt"
       helperText="hit Enter to generate images"
       placeholder="e.g. an apple on a table"
-      value={promptText}
-      onChange={onTextChanged}
       fullWidth
-      onKeyPress={handleTextPromptKeyPressed}
-      disabled={disabled}
     />
   );
 };
 
-export default withStyles(useStyles)(TextPromptInput);
+TextPromptInput.displayName = 'TextPromptInput';
+
+export default memo(TextPromptInput);
