@@ -26,7 +26,7 @@ def generate_images_api():
     generated_images = []
     for img in generated_imgs:
         now = datetime.now().time()
-        imgname = f"{text_prompt}_{dalle_version}_{now}"
+        imgname = f"{text_prompt}_{dalle_version}_{now}.jpeg"
         buffered = BytesIO()
         img.save(imgname, format="JPEG")
         img.save(buffered, format="JPEG")
