@@ -2,3 +2,4 @@
 /wandb
 /.vscode
 /backend/__pycache__
+node_modules/
