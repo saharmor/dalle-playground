@@ -183,7 +183,7 @@ const App = ({classes}) => {
                                     Images to generate
                                 </InputLabel>
                                 <Select labelId="images-per-query-label"
-                                        label="Images per text prompt" value={imagesPerQuery}
+                                        label="Images per query" value={imagesPerQuery}
                                         disabled={isFetchingImgs}
                                         onChange={(event) => setImagesPerQuery(event.target.value)}>
                                     {Array.from(Array(imagesPerQueryOptions).keys()).map((num) => {
@@ -192,12 +192,12 @@ const App = ({classes}) => {
                                         </MenuItem>
                                     })}
                                 </Select>
-                                <FormHelperText>More images = More time to generate</FormHelperText>
+                                <FormHelperText>More images = slower query</FormHelperText>
                             </FormControl>
                         </CardContent>
                     </Card>
                     {queryTime !== 0 && <Typography variant="body2" color="textSecondary">
-                        Generation execution time: {queryTime} sec
+                        Query execution time: {queryTime} sec
                     </Typography>}
                 </div>
                 {(generatedImages.length > 0 || apiError || isFetchingImgs) &&
