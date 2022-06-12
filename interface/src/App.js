@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
 import {
-    Card, CardContent, FormControl, FormHelperText,
+    Card, CardContent, Checkbox, FormControl, FormHelperText,
     InputLabel, MenuItem, Select, Typography
 } from "@material-ui/core";
 import { callDalleService } from "./backend_api";
@@ -90,12 +90,11 @@ const App = ({ classes }) => {
             setGeneratedImagesFormat(response['serverResponse']['generatedImgsFormat'])
             setIsFetchingImgs(false)
 
-
             if (notificationsOn) {
                 new Notification(
-                    "Your DALL-E images are ready!",
+                    "Your DALL-E image generation is finished!",
                     {
-                        body: `Your generations for "${promptText}" are ready to view`,
+                        body: `Your image generation for "${promptText}" is finished!`,
                         icon: NOTIFICATION_ICON,
                     },
                 )
@@ -123,6 +122,38 @@ const App = ({ classes }) => {
         return <GeneratedImageList generatedImages={generatedImages} generatedImagesFormat={generatedImagesFormat} promptText={promptText} />
     }
 
+    function NotificationCheckbox() {
+        // Check if the browser doesn't support notifications
+        if (!("Notification" in window)) {
+            console.log("This browser does not support notifications.");
+            return null;
+        }
+
+        const handleCheckboxChange = (e, checkboxValue) => {
+            if (!notificationsOn) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        setNotificationsOn(true);
+                        console.debug("Notifications have been turned on");
+                    }
+                });
+            } else {
+                setNotificationsOn(false);
+                console.debug("Notifications have been turned off");
+            }
+        };
+
+        return <div>
+            <Typography variant="caption" color="textSecondary">
+                <Checkbox
+                    label="Notify me when images are generated"
+                    checked={notificationsOn}
+                    onChange={handleCheckboxChange}
+                />
+                Notify me when images are generated
+            </Typography>
+        </div>;
+    }
 
     return (
         <div className={classes.root}>
@@ -153,6 +184,10 @@ const App = ({ classes }) => {
                                 disabled={isFetchingImgs || !validBackendUrl} />
 
                             {/* <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn}/> */}
+
+                            <TextPromptInput enterPressedCallback={enterPressedCallback}
+                                             disabled={isFetchingImgs || !validBackendUrl}/>
+                            <NotificationCheckbox />
 
                             <FormControl className={classes.imagesPerQueryControl}
                                 variant="outlined">
