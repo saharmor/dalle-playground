@@ -25,7 +25,7 @@ def generate_images_api():
     generated_images = []
     for img in generated_imgs:
         buffered = BytesIO()
-        img.save(buffered, format="JPEG")
+        img.save(buffered, format="PNG")
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
         generated_images.append(img_str)
 
