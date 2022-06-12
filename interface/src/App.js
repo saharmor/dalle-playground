@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
 import {
-    Card, CardContent, Checkbox, FormControl, FormHelperText,
+    Card, CardContent, FormControl, FormHelperText,
     InputLabel, MenuItem, Select, Typography
 } from "@material-ui/core";
 import {callDalleService} from "./backend_api";
@@ -59,14 +59,12 @@ const useStyles = () => ({
     },
 });
 
-const NOTIFICATION_ICON = "https://camo.githubusercontent.com/95d3eed25e464b300d56e93644a26c8236a19e04572cf83a95c9d68f8126be83/68747470733a2f2f656d6f6a6970656469612d75732e73332e6475616c737461636b2e75732d776573742d312e616d617a6f6e6177732e636f6d2f7468756d62732f3234302f6170706c652f3238352f776f6d616e2d6172746973745f31663436392d323030642d31663361382e706e67";
 
 const App = ({classes}) => {
     const [backendUrl, setBackendUrl] = useState('');
     const [isFetchingImgs, setIsFetchingImgs] = useState(false);
     const [isCheckingBackendEndpoint, setIsCheckingBackendEndpoint] = useState(false);
     const [isValidBackendEndpoint, setIsValidBackendEndpoint] = useState(true);
-    const [notificationsOn, setNotificationsOn] = useState(false);
     const [generatedImages, setGeneratedImages] = useState([]);
     const [apiError, setApiError] = useState('')
     const [imagesPerQuery, setImagesPerQuery] = useState(2);
@@ -83,16 +81,6 @@ const App = ({classes}) => {
             setQueryTime(response['executionTime'])
             setGeneratedImages(response['generatedImgs'])
             setIsFetchingImgs(false)
-
-            if (notificationsOn) {
-                new Notification(
-                    "Your DALL-E image generation is finished!",
-                    {
-                        body: `Your image generation for "${promptText}" is finished!`,
-                        icon: NOTIFICATION_ICON,
-                    },
-                )
-            }
         }).catch((error) => {
             console.log('Error querying DALL-E service.', error)
             if (error.message === 'Timeout') {
@@ -114,39 +102,6 @@ const App = ({classes}) => {
         }
 
         return <GeneratedImageList generatedImages={generatedImages}/>
-    }
-
-    function NotificationCheckbox() {
-        // Check if the browser doesn't support notifications
-        if (!("Notification" in window)) {
-            console.log("This browser does not support notifications.");
-            return null;
-        }
-
-        const handleCheckboxChange = (e, checkboxValue) => {
-            if (!notificationsOn) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        setNotificationsOn(true);
-                        console.debug("Notifications have been turned on");
-                    }
-                });
-            } else {
-                setNotificationsOn(false);
-                console.debug("Notifications have been turned off");
-            }
-        };
-
-        return <div>
-            <Typography variant="caption" color="textSecondary">
-                <Checkbox
-                    label="Notify me when images are generated"
-                    checked={notificationsOn}
-                    onChange={handleCheckboxChange}
-                />
-                Notify me when images are generated
-            </Typography>
-        </div>;
     }
 
     return (
@@ -175,7 +130,6 @@ const App = ({classes}) => {
                                              disabled={isFetchingImgs}/>
                             <TextPromptInput enterPressedCallback={enterPressedCallback}
                                              disabled={isFetchingImgs || !validBackendUrl}/>
-                            <NotificationCheckbox />
 
                             <FormControl className={classes.imagesPerQueryControl}
                                          variant="outlined">
