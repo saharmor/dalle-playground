@@ -22,7 +22,7 @@ You can tinker with the DALL-E playground using a Github-hosted frontend. Follow
 generating more than 1-2 images would take more than 1min, which will result in a frontend timeout. Consider upgrading to Colab Pro or run the backend notebook on your stronger ML machine (e.g. AWS EC2). 
 
 ## Using DALL-E Mega
-DALL-E Mega is substianlly more capable than DALL-E Mini and therefore generates higher fidelity images. If you have the computing power--either through a Google Colab Pro+ subcription or by having a strong local machine, select the DALL-E Mega model in the colab notebook or run the backend with a `Mega` or `Mega_full` parameter, e.g. `python dalle-playground/backend/app.py 8000 mega`
+DALL-E Mega is substianlly more capable than DALL-E Mini and therefore generates higher fidelity images. If you have the computing power--either through a Google Colab Pro+ subcription or by having a strong local machine, select the DALL-E Mega model in the colab notebook or run the backend with a `Mega` or `Mega_full` parameter, e.g. `python dalle-playground/backend/app.py --port 8000 --model_version mega`
 
 ## Local development
 
@@ -33,7 +33,7 @@ Follow these steps in case you'd like to clone and run the DALL-E playground loc
 3. Install requirements `pip install -r requirements.txt`
 4. Make sure you have pytorch and its dependencies
    installed _[Installation guide](https://pytorch.org/get-started/locally/)_
-5. Run web server `python app.py 8080` (you can change from 8080 to your own port)
+5. Run web server `python app.py --port 8080 --model_version mini` (you can change from 8080 to your own port)
 6. In a different terminal, install frontend's modules `cd interface && npm install` and run
    it `npm start`
 7. Copy backend's url from step 5 and paste it in the backend's url input within the web app
