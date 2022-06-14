@@ -7,9 +7,9 @@ export async function callDalleService(backendUrl, text, numImages) {
     const response = await Promise.race([
         (await fetch(backendUrl + `/dalle`, {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
                     'Bypass-Tunnel-Reminder': "go",
-                    'mode': 'no-cors'
                 },
                 body: JSON.stringify({
                     text,
