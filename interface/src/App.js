@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
 import {
     Card, CardContent, FormControl, FormHelperText,
     InputLabel, MenuItem, Select, Typography
 } from "@material-ui/core";
-import {callDalleService} from "./backend_api";
+import { callDalleService } from "./backend_api";
 import GeneratedImageList from "./GeneratedImageList";
 import TextPromptInput from "./TextPromptInput";
 
@@ -60,7 +60,7 @@ const useStyles = () => ({
 });
 
 
-const App = ({classes}) => {
+const App = ({ classes }) => {
     const [backendUrl, setBackendUrl] = useState('');
     const [isFetchingImgs, setIsFetchingImgs] = useState(false);
     const [isCheckingBackendEndpoint, setIsCheckingBackendEndpoint] = useState(false);
@@ -69,6 +69,8 @@ const App = ({classes}) => {
     const [apiError, setApiError] = useState('')
     const [imagesPerQuery, setImagesPerQuery] = useState(2);
     const [queryTime, setQueryTime] = useState(0);
+
+    const [promptText, setPromptText] = useState('');
 
     const imagesPerQueryOptions = 10
     const validBackendUrl = isValidBackendEndpoint && backendUrl
@@ -98,10 +100,10 @@ const App = ({classes}) => {
         }
 
         if (isFetchingImgs) {
-            return <LoadingSpinner isLoading={isFetchingImgs}/>
+            return <LoadingSpinner isLoading={isFetchingImgs} />
         }
 
-        return <GeneratedImageList generatedImages={generatedImages}/>
+        return <GeneratedImageList generatedImages={generatedImages} promptText={promptText} />
     }
 
     return (
@@ -123,16 +125,16 @@ const App = ({classes}) => {
                     <Card className={classes.searchQueryCard}>
                         <CardContent>
                             <BackendUrlInput setBackendValidUrl={setBackendUrl}
-                                             isValidBackendEndpoint={isValidBackendEndpoint}
-                                             setIsValidBackendEndpoint={setIsValidBackendEndpoint}
-                                             setIsCheckingBackendEndpoint={setIsCheckingBackendEndpoint}
-                                             isCheckingBackendEndpoint={isCheckingBackendEndpoint}
-                                             disabled={isFetchingImgs}/>
-                            <TextPromptInput enterPressedCallback={enterPressedCallback}
-                                             disabled={isFetchingImgs || !validBackendUrl}/>
+                                isValidBackendEndpoint={isValidBackendEndpoint}
+                                setIsValidBackendEndpoint={setIsValidBackendEndpoint}
+                                setIsCheckingBackendEndpoint={setIsCheckingBackendEndpoint}
+                                isCheckingBackendEndpoint={isCheckingBackendEndpoint}
+                                disabled={isFetchingImgs} />
+                            <TextPromptInput enterPressedCallback={enterPressedCallback} promptText={promptText} setPromptText={setPromptText}
+                                disabled={isFetchingImgs || !validBackendUrl} />
 
                             <FormControl className={classes.imagesPerQueryControl}
-                                         variant="outlined">
+                                variant="outlined">
                                 <InputLabel id="images-per-query-label">
                                     Images to generate
                                 </InputLabel>
@@ -155,9 +157,9 @@ const App = ({classes}) => {
                     </Typography>}
                 </div>
                 {(generatedImages.length > 0 || apiError || isFetchingImgs) &&
-                <div className={classes.gallery}>
-                    {getGalleryContent()}
-                </div>
+                    <div className={classes.gallery}>
+                        {getGalleryContent()}
+                    </div>
                 }
             </div>
         </div>

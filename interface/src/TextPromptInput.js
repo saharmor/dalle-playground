@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {TextField} from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 
 const useStyles = () => ({
     inputPrompt: {
@@ -8,9 +8,7 @@ const useStyles = () => ({
     },
 })
 
-const TextPromptInput = ({classes, enterPressedCallback, disabled}) => {
-    const [promptText, setPromptText] = useState('');
-
+const TextPromptInput = ({ classes, enterPressedCallback, disabled, promptText, setPromptText }) => {
     function handleTextPromptKeyPressed(event) {
         if (event.key === 'Enter') {
             enterPressedCallback(promptText)
@@ -23,10 +21,10 @@ const TextPromptInput = ({classes, enterPressedCallback, disabled}) => {
 
     return (
         <TextField className={classes.inputPrompt} id="prompt-input" label="Text prompt"
-                   helperText="hit Enter to generate images"
-                   placeholder="e.g. an apple on a table" value={promptText}
-                   onChange={onTextChanged} fullWidth
-                   onKeyPress={handleTextPromptKeyPressed} disabled={disabled}/>
+            helperText="hit Enter to generate images"
+            placeholder="e.g. an apple on a table" value={promptText}
+            onChange={onTextChanged} fullWidth
+            onKeyPress={handleTextPromptKeyPressed} disabled={disabled} />
     )
 }
 
