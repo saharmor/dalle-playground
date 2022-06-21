@@ -66,6 +66,8 @@ const App = ({ classes }) => {
     const [isCheckingBackendEndpoint, setIsCheckingBackendEndpoint] = useState(false);
     const [isValidBackendEndpoint, setIsValidBackendEndpoint] = useState(true);
     const [generatedImages, setGeneratedImages] = useState([]);
+    const [generatedImagesFormat, setGeneratedImagesFormat] = useState('jpeg');
+
     const [apiError, setApiError] = useState('')
     const [imagesPerQuery, setImagesPerQuery] = useState(2);
     const [queryTime, setQueryTime] = useState(0);
@@ -80,8 +82,10 @@ const App = ({ classes }) => {
         setApiError('')
         setIsFetchingImgs(true)
         callDalleService(backendUrl, promptText, imagesPerQuery).then((response) => {
+            debugger
             setQueryTime(response['executionTime'])
-            setGeneratedImages(response['generatedImgs'])
+            setGeneratedImages(response['serverResponse']['generatedImgs'])
+            setGeneratedImagesFormat(response['serverResponse']['generatedImgsFormat'])
             setIsFetchingImgs(false)
         }).catch((error) => {
             console.log('Error querying DALL-E service.', error)
@@ -103,7 +107,7 @@ const App = ({ classes }) => {
             return <LoadingSpinner isLoading={isFetchingImgs} />
         }
 
-        return <GeneratedImageList generatedImages={generatedImages} promptText={promptText} />
+        return <GeneratedImageList generatedImages={generatedImages} generatedImagesFormat={generatedImagesFormat} promptText={promptText} />
     }
 
     return (

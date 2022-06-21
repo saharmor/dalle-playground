@@ -8,13 +8,13 @@ const useStyles = () => ({
     },
 });
 
-const GeneratedImageList = ({ classes, generatedImages, promptText }) => {
-
+const GeneratedImageList = ({ classes, generatedImages, generatedImagesFormat, promptText }) => {
+    debugger
     const ImageObject = ({ imgData, promptText, index }) => {
-        const imgSrc = `data:image/png;base64,${imgData}`
+        const imgSrc = `data:image/${generatedImagesFormat};base64,${imgData}`
         const alt = `${promptText} ${index}`
         const title= "Download image"
-        const downloadedFilename = promptText + "_" + index + ".jpeg"
+        const downloadedFilename = `${promptText}_${index}.${generatedImagesFormat}`
         
         return (
             <a href={imgSrc} alt={alt} title={title} download={downloadedFilename}>

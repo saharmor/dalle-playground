@@ -28,7 +28,7 @@ export async function callDalleService(backendUrl, text, numImages) {
 
     return {
         'executionTime': Math.round(((new Date() - queryStartTime) / 1000 + Number.EPSILON) * 100) / 100,
-        'generatedImgs': JsonBigint.parse(response)
+        'serverResponse': JsonBigint.parse(response)
     }
 }
 

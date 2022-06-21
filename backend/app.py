@@ -22,6 +22,7 @@ parser = argparse.ArgumentParser(description = "A DALL-E app to turn your textua
 parser.add_argument("--port", type=int, default=8000, help = "backend port")
 parser.add_argument("--model_version", type = parse_arg_dalle_version, default = ModelSize.MINI, help = "Mini, Mega, or Mega_full")
 parser.add_argument("--save_to_disk", type = parse_arg_boolean, default = False, help = "Should save generated images to disk")
+parser.add_argument("--img_format", type = str.lower, default = "JPEG", help = "Generated images format", choices=['jpeg', 'png'])
 args = parser.parse_args()
 
 @app.route("/dalle", methods=["POST"])
@@ -32,22 +33,25 @@ def generate_images_api():
     num_images = json_data["num_images"]
     generated_imgs = dalle_model.generate_images(text_prompt, num_images)
 
-    generated_images = []
+    returned_generated_images = []
     if args.save_to_disk: 
         dir_name = os.path.join(IMAGES_OUTPUT_DIR,f"{time.strftime('%Y-%m-%d_%H:%M:%S')}_{text_prompt}")
         Path(dir_name).mkdir(parents=True, exist_ok=True)
     
     for idx, img in enumerate(generated_imgs):
         if args.save_to_disk: 
-            img.save(os.path.join(dir_name, f'{idx}.jpeg'), format="JPEG")
+          img.save(os.path.join(dir_name, f'{idx}.{args.img_format}'), format=args.img_format)
 
         buffered = BytesIO()
-        img.save(buffered, format="JPEG")
+        img.save(buffered, format=args.img_format)
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-        generated_images.append(img_str)
+        returned_generated_images.append(img_str)
 
     print(f"Created {num_images} images from text prompt [{text_prompt}]")
-    return jsonify(generated_images)
+    
+    response = {'generatedImgs': returned_generated_images,
+    'generatedImgsFormat': args.img_format}
+    return jsonify(response)
 
 
 @app.route("/", methods=["GET"])
