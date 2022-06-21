@@ -9,7 +9,6 @@ const useStyles = () => ({
 });
 
 const GeneratedImageList = ({ classes, generatedImages, generatedImagesFormat, promptText }) => {
-    debugger
     const ImageObject = ({ imgData, promptText, index }) => {
         const imgSrc = `data:image/${generatedImagesFormat};base64,${imgData}`
         const alt = `${promptText} ${index}`
