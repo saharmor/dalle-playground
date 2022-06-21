@@ -152,7 +152,7 @@ const App = ({ classes }) => {
                             <TextPromptInput enterPressedCallback={enterPressedCallback} promptText={promptText} setPromptText={setPromptText}
                                 disabled={isFetchingImgs || !validBackendUrl} />
 
-                            <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn}/>
+                            {/* <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn}/> */}
 
                             <FormControl className={classes.imagesPerQueryControl}
                                 variant="outlined">
