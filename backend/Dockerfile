@@ -22,7 +22,7 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 
 # install jax[cuda]
-RUN pip3 install --upgrade "jax[cuda]" -f https://storage.googleapis.com/jax-releases/jax_releases.html
+RUN pip install "jax[cuda11_cudnn82]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 # add source code
 COPY . /app
