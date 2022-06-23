@@ -90,7 +90,6 @@ const App = ({ classes }) => {
             setGeneratedImagesFormat(response['serverResponse']['generatedImgsFormat'])
             setIsFetchingImgs(false)
 
-
             if (notificationsOn) {
                 new Notification(
                     "Your DALL-E images are ready!",
@@ -152,7 +151,7 @@ const App = ({ classes }) => {
                             <TextPromptInput enterPressedCallback={enterPressedCallback} promptText={promptText} setPromptText={setPromptText}
                                 disabled={isFetchingImgs || !validBackendUrl} />
 
-                            {/* <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn}/> */}
+                            <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn}/>
 
                             <FormControl className={classes.imagesPerQueryControl}
                                 variant="outlined">
