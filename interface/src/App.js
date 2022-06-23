@@ -176,6 +176,7 @@ const App = ({ classes }) => {
                         Generation execution time: {queryTime} sec
                     </Typography>}
                 </div>
+                
                 {(generatedImages.length > 0 || apiError || isFetchingImgs) &&
                     <div className={classes.gallery}>
                         {getGalleryContent()}
