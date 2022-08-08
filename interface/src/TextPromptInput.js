@@ -23,7 +23,7 @@ const TextPromptInput = ({ classes, enterPressedCallback, disabled, promptText, 
         <TextField className={classes.inputPrompt} id="prompt-input" label="Text prompt"
             helperText="hit Enter to generate images"
             placeholder="e.g. an apple on a table" value={promptText}
-            onChange={onTextChanged} fullWidth
+            onChange={onTextChanged} fullWidth multiline
             onKeyPress={handleTextPromptKeyPressed} disabled={disabled} />
     )
 }

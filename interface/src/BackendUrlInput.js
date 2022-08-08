@@ -50,11 +50,12 @@ const BackendUrlInput = ({
 
     return (
         <Grid container spacing={1} alignContent="center">
-            <Grid item xs={10}>
+            <Grid item xs={12}>
                 <TextField className={classes.inputBackend} fullWidth id="standard-basic"
                            label="Backend URL" value={backendUrl} disabled={disabled}
                            error={!isValidBackendEndpoint && backendUrl !== ''}
                            helperText={!isValidBackendEndpoint && backendUrl !== '' && "No running DALL-E server with this URL (did you include the http prefix?)"}
+                           type="url" 
                            onChange={(event) => onChange(event.target.value)}/>
             </Grid>
             {isCheckingBackendEndpoint && <Grid item className={classes.loadingSpinner} xs={2}>
