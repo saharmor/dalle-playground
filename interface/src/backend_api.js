@@ -8,8 +8,7 @@ export async function callDalleService(backendUrl, text, numImages) {
         (await fetch(backendUrl + `/dalle`, {
                 method: 'POST',
                 headers: {
-                    'Bypass-Tunnel-Reminder': "go",
-                    'mode': 'no-cors'
+                    'Bypass-Tunnel-Reminder': "go"
                 },
                 body: JSON.stringify({
                     text,
@@ -28,15 +27,14 @@ export async function callDalleService(backendUrl, text, numImages) {
 
     return {
         'executionTime': Math.round(((new Date() - queryStartTime) / 1000 + Number.EPSILON) * 100) / 100,
-        'generatedImgs': JsonBigint.parse(response)
+        'serverResponse': JsonBigint.parse(response)
     }
 }
 
 export async function checkIfValidBackend(backendUrl) {
     return await fetch(backendUrl, {
         headers: {
-            'Bypass-Tunnel-Reminder': "go",
-            'mode': 'no-cors'
+            'Bypass-Tunnel-Reminder': "go"
         }
     }).then(function (response) {
         return true
