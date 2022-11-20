@@ -51,7 +51,7 @@ Window's WSL2 Linux layer has some unique issues getting running with GPU suppor
 5. In compiling `jaxlib`, you might hit a broken configuration file, solution here: https://github.com/google/jax/issues/11068
 6. Follow local development instructions above
 
-WSL2 installs are fairly bare bones, expect to install packages like `npm`, `python3-pip` and many others to get things working
+WSL2 installs are fairly bare bones, expect to install packages like `npm`, `python3-pip` and many others to get things working. More troubleshooting [here](https://github.com/saharmor/dalle-playground/pull/44)
 
 ## Local development with Docker-compose
 
