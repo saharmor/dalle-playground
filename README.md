@@ -40,6 +40,19 @@ Follow these steps in case you'd like to clone and run the DALL-E playground loc
    it `npm start`
 7. Copy backend's url from step 5 and paste it in the backend's url input within the web app
 
+## Local development/use with Windows WSL2
+
+Window's WSL2 Linux layer has some unique issues getting running with GPU support. Nvidia CUDA drivers are installed on the Windows side instead of Linux, but jax does not see the GPU without compiling from source. Here are extra instructions to get jax compiled.
+
+1. Have a recent NVIDIA GeForce Game Ready or NVIDIA RTX Quadro driver installed in Windows 
+2. In Linux: Install Nvidia's CUDA toolkit, [WSL instructions](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#wsl-installation)
+3. In Linux: Install Nvidia's CuDNN library: [instructions](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html)
+4. In Linux: Build and install both `jaxlib` and `jax` from source, remember to enable cuda during compilation with `python3 build/build.py --enable_cuda` [instructions](https://jax.readthedocs.io/en/latest/developer.html)
+5. In compiling `jaxlib`, you might hit a broken configuration file, solution here: https://github.com/google/jax/issues/11068
+6. Follow local development instructions above
+
+WSL2 installs are fairly bare bones, expect to install packages like `npm`, `python3-pip` and many others to get things working
+
 ## Local development with Docker-compose
 
 1. Make sure you have [docker](https://docs.docker.com/get-docker/) and [The NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) installed 
