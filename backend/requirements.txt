@@ -5,3 +5,4 @@ flax==0.5.0
 tqdm
 flask_cloudflared
 accelerate
+transformers
