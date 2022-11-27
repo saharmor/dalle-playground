@@ -5,7 +5,7 @@ const REQUEST_TIMEOUT_SEC = 60000
 export async function callDalleService(backendUrl, text, numImages) {
     const queryStartTime = new Date()
     const response = await Promise.race([
-        (await fetch(backendUrl + `/dalle`, {
+        (await fetch(backendUrl + `/generate`, {
                 method: 'POST',
                 headers: {
                     'Bypass-Tunnel-Reminder': "go"
