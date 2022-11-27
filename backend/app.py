@@ -7,7 +7,7 @@ import time
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from backend.stable_diffusion_wrapper import StableDiffusionWrapper
+from stable_diffusion_wrapper import StableDiffusionWrapper
 from consts import DEFAULT_IMG_OUTPUT_DIR
 from utils import parse_arg_boolean
 
