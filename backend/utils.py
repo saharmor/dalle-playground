@@ -1,6 +1,3 @@
-from consts import ModelSize
-
-
 def parse_arg_boolean(value):
     value = value.lower()
 
