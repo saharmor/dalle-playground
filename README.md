@@ -1,10 +1,13 @@
 <p align="center">
 <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/woman-artist_1f469-200d-1f3a8.png" width="60" alt="Dali">
-  <h2 align="center">DALL-E Playground</h2>
+  <h2 align="center" style="text-decoration: line-through;"> DALL-E Text-to-image Playground</h2>
 </p>
 
-A playground for DALL-E enthusiasts to tinker with the open-source version of
-OpenAI's [DALL-E](https://openai.com/blog/dall-e/), based on [DALL-E Mini](https://github.com/borisdayma/dalle-mini).
+~~test~~
+
+A playground for text-to-image enthusiasts using [Stable Diffusion V2](https://stability.ai/blog/stable-diffusion-v2-release).
+<br>Note: The original version of this repository used [DALL-E Mini](https://github.com/borisdayma/dalle-mini). With the recent release of Stable Diffusion (SD) V2 and the ease of implementation - this repository has moved to use SD over DALL-E Mini.
+
 <br><br>_Also see [Whisper Playground](https://github.com/saharmor/whisper-playground) - a playground for building real-time speech2text web apps using OpenAI's Whisper_
 
 
@@ -17,18 +20,15 @@ You can tinker with the DALL-E playground using a Github-hosted frontend. Follow
 
 1. Run the DALL-E backend using Google Colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/saharmor/dalle-playground/blob/main/backend/dalle_playground_backend.ipynb)
 2. Copy the URL from the last executed cell. Look for the line having `your url is: https://XXXX.trycloudflare.com`
-3. **Wait for the backend to fully load**, this should take ~2min and you should see `--> DALL-E Server is up and running!`
+3. **Wait for the backend to fully load**, this should take ~2min and you should see `--> Image generation server is up and running!`
 5. Browse https://saharmor.github.io/dalle-playground/?backendUrl=https://XXXX.trycloudflare.com where the `backendUrl` query parameter should be the url from the previous step
 
-**General note**: while it is possible to run the DALL-E Mini backend on the free tier of Google Colab,
-generating more than 1-2 images would take more than 1min, which will result in a frontend timeout. Consider upgrading to Colab Pro or run the backend notebook on your stronger ML machine (e.g. AWS EC2). 
+**General note**: while it is possible to run the backend on the free tier of Google Colab, generating more than ~2 images would take >1min, which will result in a frontend timeout. Consider upgrading to Colab Pro or run the backend notebook on your stronger ML machine (e.g. AWS EC2). 
 
-## Using DALL-E Mega
-DALL-E Mega is substantially more capable than DALL-E Mini and therefore generates higher fidelity images. If you have the computing power--either through a Google Colab Pro+ subcription or by having a strong local machine, select the DALL-E Mega model in the colab notebook or run the backend with a `Mega` or `Mega_full` parameter, e.g. `python dalle-playground/backend/app.py --port 8000 --model_version mega`
 
 ## Local development
 
-Follow these steps in case you'd like to clone and run the DALL-E playground locally:
+Follow these steps in case you'd like to clone and run the DALL-E Playground locally:
 
 1. Clone or fork this repository
 2. Create a virtual environment `cd backend && python3 -m venv ENV_NAME`
@@ -66,6 +66,4 @@ WSL2 installs are fairly bare bones, expect to install packages like `npm`, `pyt
    webapp at `http://localhost:3000/dalle-playground`
 
 ## Acknowledgements
-
-This repo is a full-stack flavour of [Boris Dayma's](https://github.com/borisdayma) DALL-E Mini
-repository. 
+The original reposistory used  @borisdayma's DALL-E Mini.
