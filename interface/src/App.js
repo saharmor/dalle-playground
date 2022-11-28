@@ -134,13 +134,13 @@ const App = ({ classes }) => {
         <div className={classes.root}>
             <div className={classes.title}>
                 <Typography variant="h3">
-                    DALL-E Playground <span role="img" aria-label="sparks-emoji">✨</span>
+                    Text-to-image Playground <span role="img" aria-label="sparks-emoji">✨</span>
                 </Typography>
             </div>
 
             {!validBackendUrl && <div>
                 <Typography variant="body1" color="textSecondary">
-                    Put your DALL-E backend URL to start
+                    Put your backend URL to start
                 </Typography>
             </div>}
 
