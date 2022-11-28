@@ -8,7 +8,7 @@ import time
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from stable_diffusion_wrapper import StableDiffusionWrapper
-from consts import DEFAULT_IMG_OUTPUT_DIR
+from consts import DEFAULT_IMG_OUTPUT_DIR, MAX_FILE_NAME_LEN
 from utils import parse_arg_boolean
 
 app = Flask(__name__)
@@ -33,9 +33,9 @@ def generate_images_api():
     generated_imgs = stable_diff_model.generate_images(text_prompt, num_images)
 
     returned_generated_images = []
-    if args.save_to_disk: 
+    if args.save_to_disk:
         dir_name = os.path.join(args.output_dir,f"{time.strftime('%Y-%m-%d_%H-%M-%S')}_{text_prompt}")
-        Path(dir_name).mkdir(parents=True, exist_ok=True)
+        Path(dir_name[:MAX_FILE_NAME_LEN]).mkdir(parents=True, exist_ok=True)
     
     for idx, img in enumerate(generated_imgs):
         if args.save_to_disk: 
