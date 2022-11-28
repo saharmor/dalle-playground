@@ -61,7 +61,6 @@ def health_check():
 
 with app.app_context():
     stable_diff_model = StableDiffusionWrapper()
-    stable_diff_model.generate_images("a beautiful yemanite boy wrapped in a red scarf", 1)
     print("--> Image generation server is up and running!")
 
 if __name__ == "__main__":
