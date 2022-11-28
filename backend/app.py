@@ -13,7 +13,7 @@ from utils import parse_arg_boolean
 
 app = Flask(__name__)
 CORS(app)
-print("--> Starting DALL-E Server. This might take up to two minutes.")
+print("--> Starting the image generation server. This might take up to two minutes.")
 
 stable_diff_model = None
 

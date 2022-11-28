@@ -34,7 +34,7 @@ const GeneratedImageList = ({ classes, generatedImages, generatedImagesFormat, p
 
     return (
         <div className={classes.root}>
-            <ImageList gap={20} cols={2}>
+            <ImageList gap={20} cols={3}>
                 {generatedImages.map((generatedImg, index) => (
                     <ImageObject imgData={generatedImg} promptText={promptText} key={++index} index={++index}/>
                 ))}
