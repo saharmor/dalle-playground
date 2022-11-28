@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
 import {
     Card, CardContent, FormControl, FormHelperText,
-    InputLabel, MenuItem, Select, Typography
+    InputLabel, MenuItem, Select, Typography, Link
 } from "@material-ui/core";
 import { callDalleService } from "./backend_api";
 import GeneratedImageList from "./GeneratedImageList";
@@ -59,6 +59,12 @@ const useStyles = () => ({
         alignItems: 'flex-start',
         padding: '1rem',
     },
+    getInspiredText: {
+        display: 'flex',
+        flex: 1,
+        textAlign: 'left',
+        marginTop: '5px',
+    },
 });
 
 const NOTIFICATION_ICON = "https://camo.githubusercontent.com/95d3eed25e464b300d56e93644a26c8236a19e04572cf83a95c9d68f8126be83/68747470733a2f2f656d6f6a6970656469612d75732e73332e6475616c737461636b2e75732d776573742d312e616d617a6f6e6177732e636f6d2f7468756d62732f3234302f6170706c652f3238352f776f6d616e2d6172746973745f31663436392d323030642d31663361382e706e67";
@@ -75,7 +81,7 @@ const App = ({ classes }) => {
     const [generatedImagesFormat, setGeneratedImagesFormat] = useState('jpeg');
 
     const [apiError, setApiError] = useState('')
-    const [imagesPerQuery, setImagesPerQuery] = useState(2);
+    const [imagesPerQuery, setImagesPerQuery] = useState(3);
     const [queryTime, setQueryTime] = useState(0);
 
     const imagesPerQueryOptions = 10
@@ -152,7 +158,13 @@ const App = ({ classes }) => {
                             <TextPromptInput enterPressedCallback={enterPressedCallback} promptText={promptText} setPromptText={setPromptText}
                                 disabled={isFetchingImgs || !validBackendUrl} />
 
-                            <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn}/>
+                            <div className={classes.getInspiredText}>
+                                <Typography variant="body2">
+                                    <Link href="https://lexica.art/?q=steve+jobs" underline="none" target="_blank" rel="noopener noreferrer">
+                                        Get inspired
+                                        </Link>
+                                </Typography>
+                            </div>
 
                             <FormControl className={classes.imagesPerQueryControl}
                                 variant="outlined">
@@ -171,13 +183,18 @@ const App = ({ classes }) => {
                                 </Select>
                                 <FormHelperText>More images = More time to generate</FormHelperText>
                             </FormControl>
+
+                            <NotificationCheckbox isNotificationOn={notificationsOn} setNotifications={setNotificationsOn} />
                         </CardContent>
                     </Card>
+                    
+                    <Typography variant='body2'>Hit Enter to generate images</Typography>
+
                     {queryTime !== 0 && <Typography variant="body2" color="textSecondary">
                         Generation execution time: {queryTime} sec
                     </Typography>}
                 </div>
-                
+
                 {(generatedImages.length > 0 || apiError || isFetchingImgs) &&
                     <div className={classes.gallery}>
                         {getGalleryContent()}
