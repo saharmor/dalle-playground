@@ -1,14 +1,15 @@
 <p align="center">
 <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/woman-artist_1f469-200d-1f3a8.png" width="60" alt="Dali">
-  <h2 align="center" style="text-decoration: line-through;"> DALL-E Text-to-image Playground</h2>
+  <h2 align="center">Text-to-image Playground (fka DALL-E Playground)</h2>
 </p>
 
-~~test~~
+
 
 A playground for text-to-image enthusiasts using [Stable Diffusion V2](https://stability.ai/blog/stable-diffusion-v2-release).
-<br>Note: The original version of this repository used [DALL-E Mini](https://github.com/borisdayma/dalle-mini). With the recent release of Stable Diffusion (SD) V2 and the ease of implementation - this repository has moved to use SD over DALL-E Mini.
 
-<br><br>_Also see [Whisper Playground](https://github.com/saharmor/whisper-playground) - a playground for building real-time speech2text web apps using OpenAI's Whisper_
+**Note**: The original version of this repository used [DALL-E Mini](https://github.com/borisdayma/dalle-mini). With the recent release of Stable Diffusion (SD) V2 and the ease of implementation - this repository has moved to use SD over DALL-E Mini.
+
+<br>_Also see [Whisper Playground](https://github.com/saharmor/whisper-playground) - a playground for building real-time speech2text web apps using OpenAI's Whisper_
 
 
 https://user-images.githubusercontent.com/6180201/136710500-8bb01b4c-5741-4007-a8ea-e18ba5895649.mp4
