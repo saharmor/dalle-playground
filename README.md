@@ -11,8 +11,7 @@ The original version of this repository used [DALL-E Mini](https://github.com/bo
 <br>_Also see [Whisper Playground](https://github.com/saharmor/whisper-playground) - a playground for building real-time speech2text web apps using OpenAI's Whisper_
 
 
-https://user-images.githubusercontent.com/6180201/136710500-8bb01b4c-5741-4007-a8ea-e18ba5895649.mp4
-
+![SD repo demo](https://user-images.githubusercontent.com/6180201/204181184-b257d832-d5f6-460d-8193-aaaf25214015.gif)
 
 ## Fast usage
 
