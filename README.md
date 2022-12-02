@@ -35,7 +35,7 @@ Follow these steps in case you'd like to clone and run the DALL-E Playground loc
 4. Install requirements `pip install -r requirements.txt`
 5. Make sure you have pytorch and its dependencies
    installed _[Installation guide](https://pytorch.org/get-started/locally/)_
-6. Run web server `python3 app.py --port 8080 --model_version mini` (you can change from 8080 to your own port)
+6. Run web server `python3 app.py --port 8080` (you can change from 8080 to your own port)
 7. In a different terminal, install frontend's modules `cd interface && npm install` and run
    it `npm start`
 8. Copy backend's url from step 5 and paste it in the backend's url input within the web app

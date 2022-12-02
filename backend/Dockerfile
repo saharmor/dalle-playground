@@ -28,4 +28,4 @@ RUN pip3 install --upgrade "jax[cuda]" -f https://storage.googleapis.com/jax-rel
 COPY . /app
 
 # run server
-CMD python3 app.py --port 8080 --model_version mini
+CMD python3 app.py --port 8080

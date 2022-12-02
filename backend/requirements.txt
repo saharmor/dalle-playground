@@ -6,3 +6,4 @@ tqdm
 flask_cloudflared
 accelerate
 transformers
+diffusers
