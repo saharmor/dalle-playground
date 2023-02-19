@@ -18,7 +18,7 @@ The original version of this repository used [DALL-E Mini](https://github.com/bo
 You can tinker with the DALL-E playground using a Github-hosted frontend. Follow these steps:
 
 1. Run the DALL-E backend using Google Colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/saharmor/dalle-playground/blob/main/backend/dalle_playground_backend.ipynb)
-2. Copy the URL from the last executed cell. Look for the line having `your url is: https://XXXX.trycloudflare.com`
+2. Copy the URL from the output of the last executed cell. Search for the line stating with `Your url is:`.
 3. **Wait for the backend to fully load**, this should take ~2min and you should see `--> Image generation server is up and running!`
 5. Browse https://saharmor.github.io/dalle-playground/?backendUrl=https://XXXX.trycloudflare.com where the `backendUrl` query parameter should be the url from the previous step
 
