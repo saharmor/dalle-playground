@@ -1,6 +1,7 @@
 <p align="center">
-<img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/woman-artist_1f469-200d-1f3a8.png" width="60" alt="Dali">
-  <h2 align="center">Text-to-image Playground (fka DALL-E Playground)</h2>
+
+<img src="https://user-images.githubusercontent.com/6180201/231755090-4e487da8-a9fa-4d9f-b6e3-4271f7db4ead.png" width="120" alt="Dali">
+<h2 align="center">Text-to-image Playground (fka DALL-E Playground)</h2>
 </p>
 
 A playground for text-to-image enthusiasts using [Stable Diffusion V2](https://stability.ai/blog/stable-diffusion-v2-release).
